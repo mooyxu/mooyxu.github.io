@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+<html>
+    <!-- title -->
+
+
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" >
+    <meta name="author" content="Mooy Xu">
+    <meta name="renderer" content="webkit">
+    <meta name="copyright" content="Mooy Xu">
+    <meta name="keywords" content="Mooy | Mooy Xu">
+    <meta name="description" content="code">
+    <meta name="Cache-Control" content="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <title>NTP · Mooy Xu</title>
+    <style type="text/css">
+    @font-face {
+        font-family: 'Oswald-Regular';
+        src: url("/font/Oswald-Regular.ttf");
+    }
+
+    body {
+        margin: 0;
+    }
+
+    header,
+    footer,
+    .back-top,
+    .sidebar,
+    .container,
+    .site-intro-meta,
+    .toc-wrapper {
+        display: none;
+    }
+
+    .site-intro {
+        position: relative;
+        z-index: 3;
+        width: 100%;
+        /* height: 50vh; */
+        overflow: hidden;
+    }
+
+    .site-intro-placeholder {
+        position: absolute;
+        z-index: -2;
+        top: 0;
+        left: 0;
+        width: calc(100% + 300px);
+        height: 100%;
+        background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
+        background-position: center center;
+        transform: translate3d(-226px, 0, 0);
+        animation: gradient-move 2.5s ease-out 0s 1;
+    }
+
+    @keyframes gradient-move {
+        0% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        100% {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+
+</style>
+
+    <link rel="preload" href= /css/style.css?v=20180721 as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <link rel="stylesheet" href= /css/mobile.css?v=20180721 media="(max-width: 980px)">
+    
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    
+    <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+/* This file is meant as a standalone workflow for
+- testing support for link[rel=preload]
+- enabling async CSS loading in browsers that do not support rel=preload
+- applying rel preload css once loaded, whether supported or not.
+*/ -->
+<script>
+(function( w ){
+	"use strict";
+	// rel=preload support test
+	if( !w.loadCSS ){
+		w.loadCSS = function(){};
+	}
+	// define on the loadCSS obj
+	var rp = loadCSS.relpreload = {};
+	// rel=preload feature support test
+	// runs once and returns a function for compat purposes
+	rp.support = (function(){
+		var ret;
+		try {
+			ret = w.document.createElement( "link" ).relList.supports( "preload" );
+		} catch (e) {
+			ret = false;
+		}
+		return function(){
+			return ret;
+		};
+	})();
+
+	// if preload isn't supported, get an asynchronous load by using a non-matching media attribute
+	// then change that media back to its intended value on load
+	rp.bindMediaToggle = function( link ){
+		// remember existing media attr for ultimate state, or default to 'all'
+		var finalMedia = link.media || "all";
+
+		function enableStylesheet(){
+			link.media = finalMedia;
+		}
+
+		// bind load handlers to enable media
+		if( link.addEventListener ){
+			link.addEventListener( "load", enableStylesheet );
+		} else if( link.attachEvent ){
+			link.attachEvent( "onload", enableStylesheet );
+		}
+
+		// Set rel and non-applicable media type to start an async request
+		// note: timeout allows this to happen async to let rendering continue in IE
+		setTimeout(function(){
+			link.rel = "stylesheet";
+			link.media = "only x";
+		});
+		// also enable media after 3 seconds,
+		// which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
+		setTimeout( enableStylesheet, 3000 );
+	};
+
+	// loop through link elements in DOM
+	rp.poly = function(){
+		// double check this to prevent external calls from running
+		if( rp.support() ){
+			return;
+		}
+		var links = w.document.getElementsByTagName( "link" );
+		for( var i = 0; i < links.length; i++ ){
+			var link = links[ i ];
+			// qualify links to those with rel=preload and as=style attrs
+			if( link.rel === "preload" && link.getAttribute( "as" ) === "style" && !link.getAttribute( "data-loadcss" ) ){
+				// prevent rerunning on link
+				link.setAttribute( "data-loadcss", true );
+				// bind listeners to toggle media back
+				rp.bindMediaToggle( link );
+			}
+		}
+	};
+
+	// if unsupported, run the polyfill
+	if( !rp.support() ){
+		// run once at least
+		rp.poly();
+
+		// rerun poly on an interval until onload
+		var run = w.setInterval( rp.poly, 500 );
+		if( w.addEventListener ){
+			w.addEventListener( "load", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		} else if( w.attachEvent ){
+			w.attachEvent( "onload", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		}
+	}
+
+
+	// commonjs
+	if( typeof exports !== "undefined" ){
+		exports.loadCSS = loadCSS;
+	}
+	else {
+		w.loadCSS = loadCSS;
+	}
+}( typeof global !== "undefined" ? global : this ) );
+</script>
+
+    <link rel="icon" href= "/assets/favicon.ico" />
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js" as="script" />
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js" as="script" />
+    <link rel="preload" href="/scripts/main.js" as="script" />
+    <link rel="preload" as="font" href="/font/Oswald-Regular.ttf" crossorigin>
+    <link rel="preload" as="font" href="https://at.alicdn.com/t/font_327081_1dta1rlogw17zaor.woff" crossorigin>
+    
+    <!-- fancybox -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" defer></script>
+    <!-- 百度统计  -->
+    
+    <!-- 谷歌统计  -->
+    
+</head>
+
+    
+        <body class="post-body">
+    
+    
+<header class="header">
+
+    <div class="read-progress"></div>
+    <div class="header-sidebar-menu">&#xe775;</div>
+    <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >MOOY XU</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">NTP</a>
+            </div>
+    </div>
+    
+    <a class="home-link" href=/>MOOY XU</a>
+</header>
+    <div class="wrapper">
+        <div class="site-intro" style=
+
+
+
+
+
+
+
+
+height:50vh;
+
+>
+    
+    <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
+            
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+            
+            NTP
+            <!-- 404 -->
+            
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            
+            
+            <!-- 404 -->
+            
+        </p>
+        <!-- 文章页meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                
+                    <div class="post-intro-read">
+                        <span>Word count: <span class="post-count">5,139</span> / Reading time: <span class="post-count">19 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                    <span class="post-intro-time">2018/08/08</span>
+                    
+                    <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                        <span class="iconfont-archer">&#xe602;</span>
+                        <span id="busuanzi_value_page_pv"></span>
+                    </span>
+                    
+                    <span class="shareWrapper">
+                        <span class="iconfont-archer shareIcon">&#xe71d;</span>
+                        <span class="shareText">Share</span>
+                        <ul class="shareList">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
+        
+    </div>
+</div>
+        <script>
+ 
+  // get user agent
+  var browser = {
+    versions: function () {
+      var u = window.navigator.userAgent;
+      return {
+        userAgent: u,
+        trident: u.indexOf('Trident') > -1, //IE内核
+        presto: u.indexOf('Presto') > -1, //opera内核
+        webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+        gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+        mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+        ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+        android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+        iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+        iPad: u.indexOf('iPad') > -1, //是否为iPad
+        webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
+        weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
+        uc: u.indexOf('UCBrowser') > -1 //是否为android下的UC浏览器
+      };
+    }()
+  }
+  console.log("userAgent:" + browser.versions.userAgent);
+
+  // callback
+  function fontLoaded() {
+    console.log('font loaded');
+    if (document.getElementsByClassName('site-intro-meta')) {
+      document.getElementsByClassName('intro-title')[0].classList.add('intro-fade-in');
+      document.getElementsByClassName('intro-subtitle')[0].classList.add('intro-fade-in');
+      var postIntros = document.getElementsByClassName('post-intros')[0]
+      if (postIntros) {
+        postIntros.classList.add('post-fade-in');
+      }
+    }
+  }
+
+  // UC不支持跨域，所以直接显示
+  function asyncCb(){
+    if (browser.versions.uc) {
+      console.log("UCBrowser");
+      fontLoaded();
+    } else {
+      WebFont.load({
+        custom: {
+          families: ['Oswald-Regular']
+        },
+        loading: function () {  //所有字体开始加载
+          // console.log('loading');
+        },
+        active: function () {  //所有字体已渲染
+          fontLoaded();
+        },
+        inactive: function () { //字体预加载失败，无效字体或浏览器不支持加载
+          console.log('inactive: timeout');
+          fontLoaded();
+        },
+        timeout: 5000 // Set the timeout to two seconds
+      });
+    }
+  }
+
+  function asyncErr(){
+    console.warn('script load from CDN failed, will load local script')
+  }
+
+  // load webfont-loader async, and add callback function
+  function async(u, cb, err) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (cb) { o.addEventListener('load', function (e) { cb(null, e); }, false); }
+    if (err) { o.addEventListener('error', function (e) { err(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+
+  var asyncLoadWithFallBack = function(arr, success, reject) {
+      var currReject = function(){
+        reject()
+        arr.shift()
+        if(arr.length)
+          async(arr[0], success, currReject)
+        }
+
+      async(arr[0], success, currReject)
+  }
+
+  asyncLoadWithFallBack([
+    "https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js", 
+    "https://cdn.bootcss.com/webfont/1.6.28/webfontloader.js",
+    "/lib/webfontloader.min.js"
+  ], asyncCb, asyncErr)
+</script>        
+        <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
+        <div class="container container-unloaded">
+            <main class="main post-page">
+    <article class="article-entry">
+        <h1 id="同步计算机时间的协议-——-NTP"><a href="#同步计算机时间的协议-——-NTP" class="headerlink" title="同步计算机时间的协议 —— NTP"></a>同步计算机时间的协议 —— NTP</h1><p>[TOC]</p>
+<h2 id="一、背景"><a href="#一、背景" class="headerlink" title="一、背景"></a>一、背景</h2><h3 id="早前时间的标准是什么？"><a href="#早前时间的标准是什么？" class="headerlink" title="早前时间的标准是什么？"></a>早前时间的标准是什么？</h3><p>​    地球自转的客观规律：</p>
+<ul>
+<li><p>恒星日：地球自转一圈，即转360度，称为一个恒星日，需要23小时56分4.09894秒。</p>
+<blockquote>
+<p>要想测量地球自转了360度，需要有一个参照物（测量同一经线两次正对该参照物的时间差）。在宇宙中，其他物体也都是在运动的，而越近的物体相对地球运动的角度就会更大，造成的误差就更大，所以选择以很遥远的恒星作为参照物，这样可以减少误差甚至忽略不计。</p>
+<p>这也是把自转360度称为一个恒星日的由来。</p>
+</blockquote>
+</li>
+<li><p>真太阳日：如果始终以太阳为参照物，由于地球自转时还在公转，因此同一经线从第一次到第二次正对太阳，地球总共自转了360度加约0.59度，即转了一圈多，称为一个真太阳日，需要约24小时。</p>
+</li>
+<li><p>平太阳日：由于地球绕日轨道并非正圆，所以一个真太阳日的长度在不断变化。取平均数可得同一经线从第一次到第二次正对太阳，地球总共自转了近似360.59度，称为一个平太阳日，需要24小时。</p>
+</li>
+</ul>
+<p>​        我们日常生活所需要的是对昼夜更替规律的量化，因此我们所定的“天”是选择以平太阳日（地球转360.59度）为基准的，即把一个平太阳日称为一天，一天又人为地分成24个小时。</p>
+<blockquote>
+<p>一个平太阳日被定为24小时从而推导出一个恒星日要23小时56分4.09894秒。</p>
+<p>也由此产生了旧的秒的定义。</p>
+</blockquote>
+<p>​    这24小时如何对昼夜的更替程度进行映射呢？</p>
+<p>​    整个地球根据不同的经线被划分成了24等份，即24个时区。其中格林威治所处的时区的时间称为格林威治时间。我们人为地把太阳在格林威治经线（0度经线）正头顶时的时间定为格林威治时间的平太阳日的计算起点（后以平子夜作为平太阳日起点）。其他的时区则根据距离格林威治时区的远近相应地增加/减少时间。</p>
+<blockquote>
+<p>​    这样以格林威治时区往东边加时间、往西边减时间，就会造成格林威治时区的正对面的时间刚好在两天的交界线（即一边加12小时一边减12小时，刚好相差一天），因此我们把格林威治时区的正对面称为换日线，经过换日线自行增加/减少一天。</p>
+</blockquote>
+<p>​    这也就是我们最初所定的<strong>格林威治时间</strong>，它是以地球自转为基础的时间计量系统。</p>
+<blockquote>
+<p>GMT：Greenwich Mean Time，即格林威治时间，或格林威治标准时间。</p>
+<p>UT：Universal Time，即世界时。它是格林威治时间是别名关系。</p>
+</blockquote>
+<p>​    可见格林威治时间虽然是以客观规律为基础的时间计量系统，但是它并不是一个均匀的时间度量。因此，我们开始选用即能保证遵循客观规律，又能保持时间均匀推进的时间计量系统。</p>
+<h3 id="现在时间的标准是什么？"><a href="#现在时间的标准是什么？" class="headerlink" title="现在时间的标准是什么？"></a>现在时间的标准是什么？</h3><p>​    客观规律：原子的原子核外的不同电子层之间有着能量差。当电子从高能量态跃迁到低能量态时，会释放不连续的电磁波。对于一个原子来说，这个电磁波的频率是固定的，该频率也是共振频率。</p>
+<p>​    我们把晶体振荡器等震荡仪器的震荡频率调到与该原子的共振频率相近，原子会吸收震荡仪器中与它的共振频率相等的那部分波。由于吸收了能量，原子便会释放出电磁波，所释放的电磁波频率再用来调整震荡仪器的频率。用该震荡仪器的频率再除以该原子的震荡频率，就可以得到现实中一秒的一个脉冲（犹如原子节拍器）。</p>
+<p>​    可见，使用原子的共振频率来定义秒，能得到一个平滑均匀连续且精度极高的时间。</p>
+<blockquote>
+<p>当前使用的原子主要是铯、氢、铷，其中主要用铯来规范时间。</p>
+<p>目前秒的新定义就是使用铯的共振频率来定义的：铯 -133 原子基态的两个超精细能级间在零磁场下跃迁辐射9,192,631,770周所持续的时间。</p>
+</blockquote>
+<p>​    我们目前通过比较、综合世界各地铯原子钟数据，来确定国际原子时间，并以之作为目前的标准时间，称为<strong>世界协调时</strong>。它是以原子时秒长为基础，在时刻上尽量接近于世界时的一种时间计量系统。</p>
+<blockquote>
+<p>UTC：Coordinated Universal  Time（还有个法文名，简称是综合俩名的缩写），即世界协调时，或世界统一时间、世界标准时间、国际协调时间。</p>
+</blockquote>
+<p>​    又由于地球自转速度的不均匀和公转曲线的不均匀，所以世界协调时与格林威治时间之间是有误差的。我们以格林威治时间为基准，使用均匀且接近于它值的世界协调时作为日常使用时间。再在特定时间对世界协调时做修正（加上正负闰秒），使得它对格林威治时间的误差在0.9秒之内。</p>
+<p>​    <strong>目前互联网中使用的标准时间就是世界协调时，即UTC。而我国处于+8时区，所以时间要在UTC上+8，即UTC+8。</strong></p>
+<blockquote>
+<p>CST：China Standard Time UT+8:00，中国标准时间；</p>
+<p>​    或Central Standard Time (USA) UT-6:00，美国中部时间；</p>
+<p>​    或Central Standard Time (Australia) UT+9:30，澳大利亚中部时间；</p>
+<p>​    或Cuba Standard Time UT-4:00，古巴标准时间。</p>
+</blockquote>
+<h3 id="计算机中是如何计时的？"><a href="#计算机中是如何计时的？" class="headerlink" title="计算机中是如何计时的？"></a>计算机中是如何计时的？</h3><blockquote>
+<p>此处主讲linux</p>
+</blockquote>
+<p>​    计算机中分为硬件时钟和系统时钟：</p>
+<ol>
+<li><p>硬件时钟：Hardware Clock；或Real Time Clock，简称RTC。在BIOS内部就也有一颗原子钟在计时。</p>
+<p> ​    该计时方式精度能达到微秒级别。</p>
+</li>
+<li><p>系统时钟：System Clock，也叫软件时间；或OS Clock，操作系统时间。它是指linux内核中的时钟。</p>
+<p> ​    linux内核中的时钟会直接利用CPU的周期，利用计算循环的方法来计时。CPU的时钟周期是恒定的，执行一条执行所需要的时钟周期也是恒定的。若假设一条语句要10个时钟周期，那么循环10^3次语句就是10^4次时钟周期；若假设一个时钟周期是1微秒，那么一次循环就是0.01秒。</p>
+<p> ​    而由于多任务系统下由于系统调度的原因，程序会不停中断继续，所以无法精确地知道循环固定次数用了多少时钟周期，所以在多任务系统下误差会较大。</p>
+<p> ​    该计时方式精度一般在毫秒级别。</p>
+<blockquote>
+<p>系统时钟所存储的时间非直接的时间，而是存储自1970/01/01 00:00:00.00至今的秒数。</p>
+</blockquote>
+</li>
+</ol>
+<p>​    由于计时元件（crystal）的不同和所处环境的不同，不同的计算机计时会有微小的误差。久而久之，这样的误差就可能达到数分钟。因此，我们需要一个方式，统一各台我们所需要统一的计算机的时间。</p>
+<h2 id="二、简介"><a href="#二、简介" class="headerlink" title="二、简介"></a>二、简介</h2><p>​    NTP：Network Time Protocol，即网络时间协议，是用来同步网络中计算机时间的一种协议。它可以使得计算机定时去向所配置的服务器更新时间，局域网中精度可达0.1ms，互联网中可达1-50ms。</p>
+<p>​    NTP使用的传输层协议是UDP，使用的UDP端口号是123。</p>
+<h2 id="三、基本原理"><a href="#三、基本原理" class="headerlink" title="三、基本原理"></a>三、基本原理</h2><blockquote>
+<p>层0:            [钟]</p>
+<p>​            ↓    </p>
+<p>层1:        [服务器]</p>
+<p>​            ↓</p>
+<p>层2:        [C/S端点] ←→ [C/S端点]</p>
+<p>​            ↓</p>
+<p>层3:        [C/S端点] ←→ [C/S端点]</p>
+</blockquote>
+<p>​    NTP模型中有很多的主机，每个主机都用一个ntpd表示，并且每一个主机都处于一个层级；最小层1，最高层15，层16不同步。</p>
+<blockquote>
+<p>ntpd：ntp daemon，即ntp守护进程。</p>
+<p>stratum：层级。</p>
+</blockquote>
+<p>​    其中，最顶层（层1）是一台暴露时间的服务器，该服务器一般直接与层0的物理钟（原子钟、GPS钟等）相连，也可直接设置为本机时间。</p>
+<p>​    而后每层的计算机都既是客户端也是服务器，它对上一层来说是客户端，对下一层来说是服务器。</p>
+<p>​    这些计算机之间会每隔一段时间请求一次同步。低一层的会向上一层的请求，同一层的也会相互之间请求；最小间隔64秒，最大间隔1024秒。<strong>但当误差大于1000s时，不再同步。因为这是非正常误差，可能是由人为调整或者硬件故障所造成的，所以此时NTP服务会退出，需要人工使用ntpdate来同步。</strong>（-g选项可以忽略该非正常误差，但ntpd还是会因此终止）</p>
+<p>​    当同步时间时，设备之间会发送报文以及时间戳，最终以往返时间减去延迟获得NTP时间。</p>
+<h2 id="四、同步模式"><a href="#四、同步模式" class="headerlink" title="四、同步模式"></a>四、同步模式</h2><h3 id="（一）C-S模式"><a href="#（一）C-S模式" class="headerlink" title="（一）C/S模式"></a>（一）C/S模式</h3><ol>
+<li><p>过程：客户端上需要手工指定NTP服务器的地址。客户端向NTP服务器发送NTP时间同步报文。NTP服务器收到报文后会自动工作在服务器模式，并回复应答报文。   </p>
+<p>​    如果客户端可以从多个时间服务器获取时间同步，则客户端收到应答报文后，进行时钟过滤和选择，并与优选的时钟进行时间同步。</p>
+</li>
+<li><p>方向：客户端能够与NTP服务器的时间同步，NTP服务器无法与客户端的时间同步。</p>
+</li>
+<li><p>场合：该模式通常用于下级的设备从上级的时间服务器获取时间同步。</p>
+</li>
+</ol>
+<h3 id="（二）对等体模式"><a href="#（二）对等体模式" class="headerlink" title="（二）对等体模式"></a>（二）对等体模式</h3><ol>
+<li><p>过程：主动对等体（Symmetricactivepeer）上需要手工指定被动对等体（Symmetricpassivepeer）的地址。主动对等体向被动对等体发送NTP时间同步报文。被动对等体收到报文后会自动工作在被动对等体模式，并回复应答报文。  </p>
+<p>​    如果主动对等体可以从多个时间服务器获取时间同步，则主动对等体收到应答报文后，进行时钟过滤和选择，并与优选的时钟进行时间同步。</p>
+</li>
+<li><p>方向：主动对等体和被动对等体的时间可以互相同步，如果双方的时钟都处于同步状态，则层数大的时钟与层数小的时钟的时间同步。</p>
+</li>
+<li><p>场合：该模式通常用于同级的设备间互相同步，以便在同级的设备间形成备份。如果某台设备与所有上级时间服务器的通信出现故障，则该设备仍然可以从同级的时间服务器获得时间同步</p>
+</li>
+</ol>
+<h3 id="（三）广播模式"><a href="#（三）广播模式" class="headerlink" title="（三）广播模式"></a>（三）广播模式</h3><ol>
+<li><p>过程：广播服务器周期性地向广播地址255.255.255.255发送NTP时间同步报文。广播客户端侦听来自广播服务器的广播报文，根据接收的广播报文将设备的时间与广播服务器的时间进行同步。   </p>
+<p>​    广播客户端接收到广播服务器发送的第一个NTP报文后，会与广播服务器进行报文交互，以获得报文的往返时延，为时间同步提供必要的参数。之后，只有广播服务器单方向发送报文。</p>
+</li>
+<li><p>方向：广播客户端能够与广播服务器的时间同步，广播服务器无法与广播客户端的时间同步。</p>
+</li>
+<li><p>场合：广播服务器广播发送时间同步报文，可以同时同步同一个子网中多个广播客户端的时间。</p>
+<p>​    使用同一个时间服务器为同一个子网中的大量设备提供时间同步时，可以使用广播模式，以简化网络配置由于只有广播服务器单方向发送报文，广播模式的时间准确度不如客户端/服务器模式和对等体模式。</p>
+</li>
+</ol>
+<h3 id="（四）组播模式"><a href="#（四）组播模式" class="headerlink" title="（四）组播模式"></a>（四）组播模式</h3><ol>
+<li>过程：组播服务器周期性地向指定的组播地址发送NTP时间同步报文。客户端侦听来自服务器的组播报文，根据接收的组播报文将设备的时间与组播服务器的时间进行同步。</li>
+<li>方向：组播客户端能够与组播服务器的时间同步，组播服务器无法与组播客户端的时间同步。</li>
+<li>场合：组播模式对广播模式进行了扩展，组播服务器可以同时为同一子网、不同子网的多个组播客户端提供时间同步组播模式的时间准确度不如客户端/服务器模式和对等体模式。</li>
+</ol>
+<h2 id="五、安装"><a href="#五、安装" class="headerlink" title="五、安装"></a>五、安装</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> ubuntu / Debian</span></span><br><span class="line">sudo apt install ntp ntpstat -y</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> centos / RHEL</span></span><br><span class="line">sudo yum install ntp ntpdate ntp-doc -y</span><br></pre></td></tr></table></figure>
+<h2 id="六、配置"><a href="#六、配置" class="headerlink" title="六、配置"></a>六、配置</h2><h3 id="Linux时区设置"><a href="#Linux时区设置" class="headerlink" title="Linux时区设置"></a>Linux时区设置</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 查看时区</span></span><br><span class="line">ls -l /etc/localtime</span><br><span class="line">或</span><br><span class="line">timedatectl</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 设置时区</span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment"># 方法一</span></span></span><br><span class="line">tzselect</span><br><span class="line">// 这可以根据选择获取到[时区命令]</span><br><span class="line">// 根据提示将[时区命令]存入.profile文件，再重新登陆</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment"># 方法二</span></span></span><br><span class="line">// 删除原时区</span><br><span class="line">sudo rm -f /etc/localtime</span><br><span class="line">// 链接新时区</span><br><span class="line">sudo ln -s /usr/share/zoneinfo/Asia/Shanghai /etc/localtime</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment"># 方法三</span></span></span><br><span class="line">sudo timedatectl set-timezone 'Asia/Shanghai'</span><br></pre></td></tr></table></figure>
+<h3 id="linux时间设置"><a href="#linux时间设置" class="headerlink" title="linux时间设置"></a>linux时间设置</h3><ol>
+<li><p>系统时间</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 查看系统时间</span></span><br><span class="line">data</span><br><span class="line">或</span><br><span class="line">timedatectl</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 设置系统时间（以固定字符串格式）</span></span><br><span class="line">data -s [your_time]</span><br><span class="line">data [MMDDhhmm[[CC]YY][.ss]]</span><br><span class="line">// MMDDhhmmCCYY.ss -&gt; 月 日 时 分 世纪 年 . 秒</span><br><span class="line">示例：</span><br><span class="line">data -s 08/15/18</span><br><span class="line">data -s 08:08:08</span><br><span class="line">data 0815080818.08</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>硬件时间</p>
+<blockquote>
+<p>系统开机以硬件时间为基准来开机</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 查看硬件时间</span></span><br><span class="line">hwclock</span><br><span class="line">或</span><br><span class="line">timedatectl</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 设置硬件时间（月/日/年 时:分:秒）</span></span><br><span class="line">hwclock --set --data=[your_time_str]</span><br><span class="line">示例：</span><br><span class="line">hwclock --set --date="06/18/14 14:55"</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>同步系统/硬件时间</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 以系统时间同步硬件时间</span></span><br><span class="line">hwclock --systohc [| -w]</span><br><span class="line">// w -&gt; write</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 以硬件时间同步系统时间</span></span><br><span class="line">hwclock --hctosys</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="ntp配置"><a href="#ntp配置" class="headerlink" title="ntp配置"></a>ntp配置</h3><ol>
+<li><p>配置文件路径</p>
+<p> NTP主配置文件位于<strong>/etc/ntp.conf</strong>。</p>
+</li>
+<li><p>权限管理</p>
+<p>NTP配置文件中使用<strong>restrict</strong>指令管理权限；通常的思路是先限制所有权限，再按需放行。</p>
+<p>restrict指令格式为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 统一格式</span><br><span class="line">restrict [your_ip or your_hostname] mask [netmask_IP] [parameter]</span><br><span class="line"></span><br><span class="line"># 示例</span><br><span class="line">restrict 192.168.44.130 mask 255.255.255.0 nomodify notrap</span><br></pre></td></tr></table></figure>
+<p>其中parameter主要有下列：</p>
+<ul>
+<li><p>ignore：拒绝所有类型的NTP联机。</p>
+</li>
+<li><p>nomodify：客户端不能使用ntpc与ntpq这两个程序来修改服务器的时间参数，但客户端仍可透过这部主机来进行网络校时的。</p>
+</li>
+<li><p>noquery：客户端不能够使用ntpq, ntpc等指令来查询时间服务器，等于不提供NTP的网络校时。</p>
+</li>
+<li><p>notrap：不提供trap这个远程事件登录(remote event logging)的功能。</p>
+</li>
+<li><p>notrust：拒绝没有认证的客户端。</p>
+</li>
+</ul>
+<blockquote>
+<p>不加任何参数即该IP/网段无任何限制</p>
+</blockquote>
+</li>
+<li><p>上层服务器设定</p>
+<p> NTP配置文件中是用<strong>server</strong>指令来设置上层服务器，即向哪台服务器请求校时。</p>
+<p> server指令格式为：</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 统一格式</span><br><span class="line">server [your_IP or your_hostname] [prefer]</span><br></pre></td></tr></table></figure>
+<p> 其中prefer参数表示是否优先选择。</p>
+</li>
+<li><p>时钟偏移记录</p>
+<p> 系统时钟与硬件时钟之间会存在时间上的差异，NTP配置文件中使用<strong>driftfile</strong>指令来设置记录这些差异的文件的存放位置。ntpd会每小时更新一次它。</p>
+<p> driftfile指令格式为：</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">driftfile [可以被ntpd写入的具体文件路径]</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>注意该参数需要是具体文件路径并且ntpd对它要有读写权限。</p>
+<p>文件内的时间单位是10^(-6)秒。</p>
+</blockquote>
+</li>
+<li><p>密钥系统</p>
+<p> 密钥系统也可以管理权限，NTP配置文件中使用<strong>key</strong>指令来设置。它不常用。</p>
+</li>
+</ol>
+<h3 id="ntp配置实例"><a href="#ntp配置实例" class="headerlink" title="ntp配置实例"></a>ntp配置实例</h3><blockquote>
+<p>假设ntp服务器是台湾的tock/tick/time。</p>
+<p>假设有局域网ntp请求。</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 打开文件</span></span><br><span class="line">sudo vi /etc/ntp.conf</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 1. 先处理权限方面的问题，包括放行上层服务器以及开放局域网用户来源：</span></span><br><span class="line">restrict default kod nomodify notrap nopeer noquery     &lt;==拒绝 IPv4 的用户</span><br><span class="line">restrict -6 default kod nomodify notrap nopeer noquery  &lt;==拒绝 IPv6 的用户</span><br><span class="line">restrict 220.130.158.71   &lt;==放行 tock.stdtime.gov.tw 进入本 NTP 的服务器</span><br><span class="line">restrict 59.124.196.83    &lt;==放行 tick.stdtime.gov.tw 进入本 NTP 的服务器</span><br><span class="line">restrict 59.124.196.84    &lt;==放行 time.stdtime.gov.tw 进入本 NTP 的服务器</span><br><span class="line">restrict 127.0.0.1        &lt;==底下两个是默认值，放行本机来源</span><br><span class="line">restrict -6 ::1</span><br><span class="line">restrict 192.168.100.0 mask 255.255.255.0 nomodify &lt;==放行局域网用户来源，或者列出单独IP</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 2. 设定主机来源，请先将原本的 [0|1|2].centos.pool.ntp.org 的设定批注掉：</span></span><br><span class="line">server 220.130.158.71 prefer  &lt;==以这部主机为最优先的server</span><br><span class="line">server 59.124.196.83</span><br><span class="line">server 59.124.196.84</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 3.默认的一个内部时钟数据，用在没有外部 NTP 服务器时，使用它为局域网用户提供服务：</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> server    127.127.1.0     <span class="comment"># local clock</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> fudge     127.127.1.0 stratum 10</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 4.预设时间差异分析档案与暂不用到的 keys 等，不需要更动它：</span></span><br><span class="line">driftfile /var/lib/ntp/drift</span><br><span class="line">keys      /etc/ntp/keys</span><br></pre></td></tr></table></figure>
+<h2 id="七、运行和维护"><a href="#七、运行和维护" class="headerlink" title="七、运行和维护"></a>七、运行和维护</h2><h3 id="启动ntpd"><a href="#启动ntpd" class="headerlink" title="启动ntpd"></a>启动ntpd</h3><blockquote>
+<p>注意要开放123端口，能ping通上层服务器，且与上层服务器的时间差不可超过最大误差。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;</span><span class="bash"> <span class="comment"># 如iptables防火墙修改开通局域网的123端口</span></span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> vim /usr/<span class="built_in">local</span>/virus/iptables/iptables.allow</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> // 加入下面内容</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> iptables -A INPUT -i <span class="variable">$EXTIF</span> -p udp -s 192.168.100.0/24 --dport 123 -j ACCEPT</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> // 启动</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> /usr/<span class="built_in">local</span>/virus/iptables/iptables.rule</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"></span></span><br></pre></td></tr></table></figure>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> ubuntu</span></span><br><span class="line">/etc/init.d/ntp start</span><br><span class="line">或</span><br><span class="line">systemctl start ntp</span><br><span class="line">或</span><br><span class="line">service ntp start</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> centos</span></span><br><span class="line">systemctl start ntpd</span><br><span class="line">或</span><br><span class="line">chkconfig ntpd on</span><br></pre></td></tr></table></figure>
+<h3 id="检查ntp状态"><a href="#检查ntp状态" class="headerlink" title="检查ntp状态"></a>检查ntp状态</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 方法一</span></span><br><span class="line">ntpstat</span><br><span class="line">//检查</span><br><span class="line"></span><br><span class="line">service --status-all | grep ntp</span><br><span class="line">// 加号表示已启动</span><br><span class="line"></span><br><span class="line">netstat -tlunp | grep ntp</span><br><span class="line">// UDP协议，123端口</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 方法二</span></span><br><span class="line">ntpq -p</span><br></pre></td></tr></table></figure>
+<p>其中ntpq的执行结果每列含义如下：</p>
+<ul>
+<li>remote：远程连接的NTP主机的IP或者主机名称。<ul>
+<li>开头如果是『 * 』，代表该上层NTP服务器已连上线，并正在作用当中；</li>
+<li>开头如果是『 + 』，代表该上层NTP服务器也已连上线，但尚为作用，可作为下一个提供时间更新的候选者。</li>
+</ul>
+</li>
+<li>refid：所参考的上层NTP服务器地址；</li>
+<li>st：stratum，即NTP层数；</li>
+<li>when：最近的一次NTP时间更新动作是在几秒钟之前；</li>
+<li>poll：下一次NTP时间更新动作在几秒钟之后；</li>
+<li>reach：已向上层NTP服务器请求了多少次时间更新；</li>
+<li>delay：时间更新时的网络延迟，单位10^(-3) 秒；</li>
+<li>offset：时间补偿的结果，单位10^(-3) 秒；</li>
+<li>jitter：系统时间和硬件时间的差值，单位 10^(-3) 秒。</li>
+</ul>
+<h3 id="立即更新时间"><a href="#立即更新时间" class="headerlink" title="立即更新时间"></a>立即更新时间</h3><p>NTP用户端想要立即更新时间，可以使用<strong>ntpdate</strong>命令，但是默认它不能与ntpd同时使用。</p>
+<blockquote>
+<p>当用户端与服务端时间的误差较大时，会无法启用ntpd进行更新，此时建议先使用ntpdate来更新一次。</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 命令格式</span></span><br><span class="line">ntpdate [-dv] [NTP_IP/NTP_hostname]</span><br><span class="line">// 参数d：debug，进入调试模式，可以展示出更多有效信息。</span><br><span class="line">// 参数v：显示更多信息。</span><br><span class="line"></span><br><span class="line">示例：</span><br><span class="line">ntpdate 192.168.100.254</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>通过ntpdate也可以实现定时更新时间。</p>
+<p>但该方式仅适合不启动ntpd的情况，当客户端较多时，建议启用ntpd。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;</span><span class="bash"> vi /etc/crontab</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> // 加入下面内容，使得每天5点10分自动执行ntpdate tock.stdtime.gov.tw去更新时间，并且展示时间</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> 10 5 * * * root (/usr/sbin/ntpdate tock.stdtime.gov.tw &amp;&amp; /sbin/hwclock -w) &amp;&gt; /dev/null</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"></span></span><br></pre></td></tr></table></figure>
+</blockquote>
+
+    </article>
+    <!-- license  -->
+    
+        <div class="license-wrapper">
+            <p>原文作者: <a href="http://yoursite.com">Mooy Xu</a>
+            <p>原文链接: <a href="http://yoursite.com/2018/08/08/计算机时间以及NTP_done/">http://yoursite.com/2018/08/08/计算机时间以及NTP_done/</a>
+            <p>发表日期: <a href="http://yoursite.com/2018/08/08/计算机时间以及NTP_done/">August 8th 2018, 10:15:34 am</a>
+            <p>版权声明: 本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
+        </div>
+    
+    <!-- paginator  -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href= "/2018/08/01/Javascript_test/" title= test for javascript >
+                    <div class="prevTitle">test for javascript</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+<!-- City版安装代码已完成 -->
+    
+    
+    <!--PC和WAP自适应版-->
+
+    <!--PC版-->
+
+
+    
+    
+
+    <!-- 评论 -->
+</main>
+            <!-- profile -->
+            
+        </div>
+        <footer class="footer footer-unloaded">
+    <!-- social  -->
+    
+    <div class="social">
+        
+    
+        
+            
+                <a href="mailto:xumengyu2008@qq.com" class="iconfont-archer email" title=email ></a>
+            
+        
+    
+        
+            
+                <a href="//github.com/mooyxu" class="iconfont-archer github" target="_blank" title=github></a>
+            
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+            
+                <a href="//www.baidu.com" class="iconfont-archer baidu" target="_blank" title=baidu></a>
+            
+        
+    
+        
+            
+                <a href="//www.google.com" class="iconfont-archer google" target="_blank" title=google></a>
+            
+        
+    
+        
+    
+
+    </div>
+    
+    <!-- powered by Hexo  -->
+    <div class="copyright">
+        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span><span id="theme-info">theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">Archer</a></span>
+    </div>
+    <!-- 不蒜子  -->
+    
+    <div class="busuanzi-container">
+    
+     
+    <span id="busuanzi_container_site_pv">PV: <span id="busuanzi_value_site_pv"></span> :)</span>
+    
+    </div>
+    
+</footer>
+    </div>
+    <!-- toc -->
+    
+    <div class="toc-wrapper" style=
+    
+
+
+
+
+
+
+
+top:50vh;
+
+    >
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#同步计算机时间的协议-——-NTP"><span class="toc-number">1.</span> <span class="toc-text">同步计算机时间的协议 —— NTP</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、背景"><span class="toc-number">1.1.</span> <span class="toc-text">一、背景</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#早前时间的标准是什么？"><span class="toc-number">1.1.1.</span> <span class="toc-text">早前时间的标准是什么？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#现在时间的标准是什么？"><span class="toc-number">1.1.2.</span> <span class="toc-text">现在时间的标准是什么？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#计算机中是如何计时的？"><span class="toc-number">1.1.3.</span> <span class="toc-text">计算机中是如何计时的？</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、简介"><span class="toc-number">1.2.</span> <span class="toc-text">二、简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三、基本原理"><span class="toc-number">1.3.</span> <span class="toc-text">三、基本原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#四、同步模式"><span class="toc-number">1.4.</span> <span class="toc-text">四、同步模式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#（一）C-S模式"><span class="toc-number">1.4.1.</span> <span class="toc-text">（一）C/S模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#（二）对等体模式"><span class="toc-number">1.4.2.</span> <span class="toc-text">（二）对等体模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#（三）广播模式"><span class="toc-number">1.4.3.</span> <span class="toc-text">（三）广播模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#（四）组播模式"><span class="toc-number">1.4.4.</span> <span class="toc-text">（四）组播模式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#五、安装"><span class="toc-number">1.5.</span> <span class="toc-text">五、安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#六、配置"><span class="toc-number">1.6.</span> <span class="toc-text">六、配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Linux时区设置"><span class="toc-number">1.6.1.</span> <span class="toc-text">Linux时区设置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#linux时间设置"><span class="toc-number">1.6.2.</span> <span class="toc-text">linux时间设置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ntp配置"><span class="toc-number">1.6.3.</span> <span class="toc-text">ntp配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ntp配置实例"><span class="toc-number">1.6.4.</span> <span class="toc-text">ntp配置实例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#七、运行和维护"><span class="toc-number">1.7.</span> <span class="toc-text">七、运行和维护</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#启动ntpd"><span class="toc-number">1.7.1.</span> <span class="toc-text">启动ntpd</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#检查ntp状态"><span class="toc-number">1.7.2.</span> <span class="toc-text">检查ntp状态</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#立即更新时间"><span class="toc-number">1.7.3.</span> <span class="toc-text">立即更新时间</span></a></li></ol></li></ol></li></ol>
+    </div>
+    
+    <div class="back-top iconfont-archer">&#xe639;</div>
+    <div class="sidebar sidebar-hide">
+    <ul class="sidebar-tabs sidebar-tabs-active-0">
+        <li class="sidebar-tab-archives"><span class="iconfont-archer">&#xe67d;</span><span class="tab-name">Archive</span></li>
+        <li class="sidebar-tab-tags"><span class="iconfont-archer">&#xe61b;</span><span class="tab-name">Tag</span></li>
+        <li class="sidebar-tab-categories"><span class="iconfont-archer">&#xe666;</span><span class="tab-name">Cate</span></li>
+    </ul>
+    <div class="sidebar-content sidebar-content-show-archive">
+          <div class="sidebar-panel-archives">
+    <!-- 在ejs中将archive按照时间排序 -->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-and-search">
+        <div class="total-archive">
+        Total : 4
+        </div>
+        <!-- search  -->
+        
+    </div>
+    
+    <div class="post-archive">
+    
+    
+    
+    
+    <div class="archive-year"> 2018 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/08</span><a class="archive-post-title" href= "/2018/08/08/计算机时间以及NTP_done/" >NTP</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> Invalid date </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2018/07/05/Markdown_done/" >Markdown总结</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2018 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/01</span><a class="archive-post-title" href= "/2018/08/01/Javascript_test/" >test for javascript</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/31</span><a class="archive-post-title" href= "/2018/07/31/Hexo_done/" >Hexo总结</a>
+        </li>
+    
+    </div>
+  </div>
+        <div class="sidebar-panel-tags">
+    <div class="sidebar-tags-name">
+    
+    </div>
+    <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+    缺失模块。<br/>
+    1、请确保node版本大于6.2<br/>
+    2、在博客根目录（注意不是archer根目录）执行以下命令：<br/>
+    <span style="color: #f75357; font-size: 1rem; line-height: 2rem;">npm i hexo-generator-json-content --save</span><br/>
+    3、在根目录_config.yml里添加配置：
+    <pre style="color: #787878; font-size: 0.6rem;">
+jsonContent:
+  meta: false
+  pages: false
+  posts:
+    title: true
+    date: true
+    path: true
+    text: false
+    raw: false
+    content: false
+    slug: false
+    updated: false
+    comments: false
+    link: false
+    permalink: false
+    excerpt: false
+    categories: true
+    tags: true</pre>
+    </div> 
+    <div class="sidebar-tags-list"></div>
+</div>
+        <div class="sidebar-panel-categories">
+    <div class="sidebar-categories-name">
+    
+        <span class="sidebar-category-name" data-categories="Language"><span class="iconfont-archer">&#xe60a;</span>Language</span>
+    
+        <span class="sidebar-category-name" data-categories="Language/Markdown"><span class="iconfont-archer">&#xe60a;</span>Language/Markdown</span>
+    
+    </div>
+    <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
+    <div class="sidebar-categories-list"></div>
+</div>
+    </div>
+</div> 
+    <script>
+    var siteMeta = {
+        root: "/",
+        author: "Mooy Xu"
+    }
+</script>
+    <!-- CDN failover -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+    <script type="text/javascript">
+        if (typeof window.$ === 'undefined')
+        {
+            console.warn('jquery load from jsdelivr failed, will load local script')
+            document.write('<script src="/lib/jquery.min.js">\x3C/script>')
+        }
+    </script>
+    <script src="/scripts/main.js"></script>
+    <!-- algolia -->
+    
+    <!-- busuanzi  -->
+    
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+    <!-- CNZZ  -->
+    
+    </div>
+    <!-- async load share.js -->
+    
+        <script src="/scripts/share.js" async></script>    
+     
+    </body>
+</html>
+
+
