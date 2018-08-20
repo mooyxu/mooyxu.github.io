@@ -1,0 +1,1041 @@
+<!DOCTYPE html>
+<html>
+    <!-- title -->
+
+
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" >
+    <meta name="author" content="Mooy Xu">
+    <meta name="renderer" content="webkit">
+    <meta name="copyright" content="Mooy Xu">
+    <meta name="keywords" content="Mooy | Mooy Xu">
+    <meta name="description" content="code">
+    <meta name="Cache-Control" content="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <title>YAML · Mooy Xu</title>
+    <style type="text/css">
+    @font-face {
+        font-family: 'Oswald-Regular';
+        src: url("/font/Oswald-Regular.ttf");
+    }
+
+    body {
+        margin: 0;
+    }
+
+    header,
+    footer,
+    .back-top,
+    .sidebar,
+    .container,
+    .site-intro-meta,
+    .toc-wrapper {
+        display: none;
+    }
+
+    .site-intro {
+        position: relative;
+        z-index: 3;
+        width: 100%;
+        /* height: 50vh; */
+        overflow: hidden;
+    }
+
+    .site-intro-placeholder {
+        position: absolute;
+        z-index: -2;
+        top: 0;
+        left: 0;
+        width: calc(100% + 300px);
+        height: 100%;
+        background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
+        background-position: center center;
+        transform: translate3d(-226px, 0, 0);
+        animation: gradient-move 2.5s ease-out 0s 1;
+    }
+
+    @keyframes gradient-move {
+        0% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        100% {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+
+</style>
+
+    <link rel="preload" href= /css/style.css?v=20180721 as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <link rel="stylesheet" href= /css/mobile.css?v=20180721 media="(max-width: 980px)">
+    
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    
+    <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+/* This file is meant as a standalone workflow for
+- testing support for link[rel=preload]
+- enabling async CSS loading in browsers that do not support rel=preload
+- applying rel preload css once loaded, whether supported or not.
+*/ -->
+<script>
+(function( w ){
+	"use strict";
+	// rel=preload support test
+	if( !w.loadCSS ){
+		w.loadCSS = function(){};
+	}
+	// define on the loadCSS obj
+	var rp = loadCSS.relpreload = {};
+	// rel=preload feature support test
+	// runs once and returns a function for compat purposes
+	rp.support = (function(){
+		var ret;
+		try {
+			ret = w.document.createElement( "link" ).relList.supports( "preload" );
+		} catch (e) {
+			ret = false;
+		}
+		return function(){
+			return ret;
+		};
+	})();
+
+	// if preload isn't supported, get an asynchronous load by using a non-matching media attribute
+	// then change that media back to its intended value on load
+	rp.bindMediaToggle = function( link ){
+		// remember existing media attr for ultimate state, or default to 'all'
+		var finalMedia = link.media || "all";
+
+		function enableStylesheet(){
+			link.media = finalMedia;
+		}
+
+		// bind load handlers to enable media
+		if( link.addEventListener ){
+			link.addEventListener( "load", enableStylesheet );
+		} else if( link.attachEvent ){
+			link.attachEvent( "onload", enableStylesheet );
+		}
+
+		// Set rel and non-applicable media type to start an async request
+		// note: timeout allows this to happen async to let rendering continue in IE
+		setTimeout(function(){
+			link.rel = "stylesheet";
+			link.media = "only x";
+		});
+		// also enable media after 3 seconds,
+		// which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
+		setTimeout( enableStylesheet, 3000 );
+	};
+
+	// loop through link elements in DOM
+	rp.poly = function(){
+		// double check this to prevent external calls from running
+		if( rp.support() ){
+			return;
+		}
+		var links = w.document.getElementsByTagName( "link" );
+		for( var i = 0; i < links.length; i++ ){
+			var link = links[ i ];
+			// qualify links to those with rel=preload and as=style attrs
+			if( link.rel === "preload" && link.getAttribute( "as" ) === "style" && !link.getAttribute( "data-loadcss" ) ){
+				// prevent rerunning on link
+				link.setAttribute( "data-loadcss", true );
+				// bind listeners to toggle media back
+				rp.bindMediaToggle( link );
+			}
+		}
+	};
+
+	// if unsupported, run the polyfill
+	if( !rp.support() ){
+		// run once at least
+		rp.poly();
+
+		// rerun poly on an interval until onload
+		var run = w.setInterval( rp.poly, 500 );
+		if( w.addEventListener ){
+			w.addEventListener( "load", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		} else if( w.attachEvent ){
+			w.attachEvent( "onload", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		}
+	}
+
+
+	// commonjs
+	if( typeof exports !== "undefined" ){
+		exports.loadCSS = loadCSS;
+	}
+	else {
+		w.loadCSS = loadCSS;
+	}
+}( typeof global !== "undefined" ? global : this ) );
+</script>
+
+    <link rel="icon" href= "/assets/favicon.ico" />
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js" as="script" />
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js" as="script" />
+    <link rel="preload" href="/scripts/main.js" as="script" />
+    <link rel="preload" as="font" href="/font/Oswald-Regular.ttf" crossorigin>
+    <link rel="preload" as="font" href="https://at.alicdn.com/t/font_327081_1dta1rlogw17zaor.woff" crossorigin>
+    
+    <!-- fancybox -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" defer></script>
+    <!-- 百度统计  -->
+    
+    <!-- 谷歌统计  -->
+    
+</head>
+
+    
+        <body class="post-body">
+    
+    
+<header class="header">
+
+    <div class="read-progress"></div>
+    <div class="header-sidebar-menu">&#xe775;</div>
+    <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >MOOY XU</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">YAML</a>
+            </div>
+    </div>
+    
+    <a class="home-link" href=/>MOOY XU</a>
+</header>
+    <div class="wrapper">
+        <div class="site-intro" style=
+
+
+
+
+
+
+
+
+height:50vh;
+
+>
+    
+    <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
+            
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+            
+            YAML
+            <!-- 404 -->
+            
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            
+            
+            <!-- 404 -->
+            
+        </p>
+        <!-- 文章页meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                
+                    <div class="post-intro-read">
+                        <span>Word count: <span class="post-count">2,265</span> / Reading time: <span class="post-count">10 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                    <span class="post-intro-time">2018/08/16</span>
+                    
+                    <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                        <span class="iconfont-archer">&#xe602;</span>
+                        <span id="busuanzi_value_page_pv"></span>
+                    </span>
+                    
+                    <span class="shareWrapper">
+                        <span class="iconfont-archer shareIcon">&#xe71d;</span>
+                        <span class="shareText">Share</span>
+                        <ul class="shareList">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
+        
+    </div>
+</div>
+        <script>
+ 
+  // get user agent
+  var browser = {
+    versions: function () {
+      var u = window.navigator.userAgent;
+      return {
+        userAgent: u,
+        trident: u.indexOf('Trident') > -1, //IE内核
+        presto: u.indexOf('Presto') > -1, //opera内核
+        webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+        gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+        mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+        ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+        android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+        iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+        iPad: u.indexOf('iPad') > -1, //是否为iPad
+        webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
+        weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
+        uc: u.indexOf('UCBrowser') > -1 //是否为android下的UC浏览器
+      };
+    }()
+  }
+  console.log("userAgent:" + browser.versions.userAgent);
+
+  // callback
+  function fontLoaded() {
+    console.log('font loaded');
+    if (document.getElementsByClassName('site-intro-meta')) {
+      document.getElementsByClassName('intro-title')[0].classList.add('intro-fade-in');
+      document.getElementsByClassName('intro-subtitle')[0].classList.add('intro-fade-in');
+      var postIntros = document.getElementsByClassName('post-intros')[0]
+      if (postIntros) {
+        postIntros.classList.add('post-fade-in');
+      }
+    }
+  }
+
+  // UC不支持跨域，所以直接显示
+  function asyncCb(){
+    if (browser.versions.uc) {
+      console.log("UCBrowser");
+      fontLoaded();
+    } else {
+      WebFont.load({
+        custom: {
+          families: ['Oswald-Regular']
+        },
+        loading: function () {  //所有字体开始加载
+          // console.log('loading');
+        },
+        active: function () {  //所有字体已渲染
+          fontLoaded();
+        },
+        inactive: function () { //字体预加载失败，无效字体或浏览器不支持加载
+          console.log('inactive: timeout');
+          fontLoaded();
+        },
+        timeout: 5000 // Set the timeout to two seconds
+      });
+    }
+  }
+
+  function asyncErr(){
+    console.warn('script load from CDN failed, will load local script')
+  }
+
+  // load webfont-loader async, and add callback function
+  function async(u, cb, err) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (cb) { o.addEventListener('load', function (e) { cb(null, e); }, false); }
+    if (err) { o.addEventListener('error', function (e) { err(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+
+  var asyncLoadWithFallBack = function(arr, success, reject) {
+      var currReject = function(){
+        reject()
+        arr.shift()
+        if(arr.length)
+          async(arr[0], success, currReject)
+        }
+
+      async(arr[0], success, currReject)
+  }
+
+  asyncLoadWithFallBack([
+    "https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js", 
+    "https://cdn.bootcss.com/webfont/1.6.28/webfontloader.js",
+    "/lib/webfontloader.min.js"
+  ], asyncCb, asyncErr)
+</script>        
+        <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
+        <div class="container container-unloaded">
+            <main class="main post-page">
+    <article class="article-entry">
+        <h1 id="YAML"><a href="#YAML" class="headerlink" title="YAML"></a>YAML</h1><blockquote>
+<p>简介：YAML是一门数据序列化语言。它最初设计用来做数据存储和传递的常见案例，如配置文件、日志文件、进程间传递数据、跨语言信息共享等，其中尤以配置文件为重。由于它使用了常用的灵活编程语言中的原生基本数据类型，并且使用了Unicode编码，所以它有着跨语言的特性。也因为语法的简洁，所以它更适宜于人类阅读。从功能上，YAML还是JSON的父级。</p>
+<p>YAML：YAML Ain’t Markup Language.</p>
+<p>官方文档：<a href="http://yaml.org/spec/1.2/spec.html" target="_blank" rel="noopener">http://yaml.org/spec/1.2/spec.html</a></p>
+<p>yaml-json：<a href="http://www.bejson.com/validators/yaml_editor/" target="_blank" rel="noopener">http://www.bejson.com/validators/yaml_editor/</a></p>
+</blockquote>
+<p>[TOC]</p>
+<h2 id="一、概览"><a href="#一、概览" class="headerlink" title="一、概览"></a>一、概览</h2><p>yaml中的数据类型可以分为三大类：核心类型（core）、定义类型（defined）、用户定义类型（user-defined）。</p>
+<ol>
+<li><p>核心类型包含三个基本元素（映射、序列、纯量），它们可以被所有解析器直接解析。</p>
+<blockquote>
+<p>每门语言都有着自己的数据结构（data structures），但是都围绕着三个基本元素：</p>
+<ol>
+<li>映射mappings：也叫哈希hashes、字典dictionary、对象objects。</li>
+<li>序列sequences：也叫数组arrays、列表lists。</li>
+<li>纯量scalars：有字符串strings、数字numbers等。</li>
+</ol>
+<p>而yaml就是利用这三个基本元素，增加了类型系统和别名机制，形成了一门可以序列化任何原生数据结构的语言。</p>
+</blockquote>
+</li>
+<li><p>定义类型是指yaml有定义的所有类型，但是并非所有解析起都能解析这些类型。</p>
+</li>
+<li><p>用户定义类型是指用户自定义出的类型。</p>
+</li>
+</ol>
+<p>特殊情况下，我们使用双感叹号对这些类型进行强制转换。</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 定义类型</span></span><br><span class="line"><span class="type">!!int</span>               <span class="comment"># 整数类型</span></span><br><span class="line"><span class="type">!!float</span>             <span class="comment"># 浮点类型</span></span><br><span class="line"><span class="type">!!bool</span>              <span class="comment"># 布尔类型</span></span><br><span class="line"><span class="type">!!str</span>               <span class="comment"># 字符串类型</span></span><br><span class="line"><span class="type">!!binary</span>            <span class="comment"># 也是字符串类型</span></span><br><span class="line"><span class="type">!!timestamp</span>         <span class="comment"># 日期时间类型</span></span><br><span class="line"><span class="type">!!null</span>              <span class="comment"># 空值</span></span><br><span class="line"><span class="type">!!set</span>               <span class="comment"># 集合</span></span><br><span class="line"><span class="type">!!omap</span><span class="string">,</span> <span class="type">!!pairs</span>     <span class="comment"># 键值列表或对象列表</span></span><br><span class="line"><span class="type">!!seq</span>               <span class="comment"># 序列，也是列表</span></span><br><span class="line"><span class="type">!!map</span>               <span class="comment"># 键值表</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 强制转换示例</span></span><br><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">str:</span> <span class="string">!str</span> <span class="number">123</span></span><br><span class="line"><span class="string">...</span></span><br><span class="line"><span class="bullet">-</span><span class="bullet">--</span> <span class="type">!!str</span></span><br><span class="line"><span class="attr">str:</span> <span class="number">123</span></span><br><span class="line"><span class="string">...</span></span><br></pre></td></tr></table></figure>
+<h2 id="二、基本规范"><a href="#二、基本规范" class="headerlink" title="二、基本规范"></a>二、基本规范</h2><ol>
+<li>YAML使用unicode编码，常用utf-8。</li>
+<li>YAML大小写敏感。</li>
+<li>YAML缩进只用空格，建议使用俩空格。</li>
+<li>YAML同一层级使用等量缩进表示，称为块集合。（同python）</li>
+</ol>
+<h2 id="三、宏观结构"><a href="#三、宏观结构" class="headerlink" title="三、宏观结构"></a>三、宏观结构</h2><p>yaml文件可以包含一个或多个yaml文档，yaml文档是yaml文件的基本组成单位。</p>
+<p>一个yaml文档以三个短横线开头，三个点结尾（可省略），以标示它的独立范围。</p>
+<p>当yaml文件中只有一个yaml文档时，短横线标示符也可以省略。</p>
+<p>此外，三个短横线还可以把指令（directives）从文档文本中分隔出来。</p>
+<h2 id="四、微观数据（核心类型）"><a href="#四、微观数据（核心类型）" class="headerlink" title="四、微观数据（核心类型）"></a>四、微观数据（核心类型）</h2><h3 id="（一）纯量scalars"><a href="#（一）纯量scalars" class="headerlink" title="（一）纯量scalars"></a>（一）纯量scalars</h3><ol>
+<li><p>数字类型</p>
+<ul>
+<li><p>整数init</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">integer:</span> <span class="number">12345</span>     <span class="comment"># 十进制</span></span><br><span class="line"><span class="attr">octal:</span> <span class="number">0</span><span class="string">o34</span>        <span class="comment"># 八进制，第二个是字母 o</span></span><br><span class="line"><span class="attr">hex:</span> <span class="number">0xFF</span>          <span class="comment"># 十六进制</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>浮点数float</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">float:</span> <span class="number">1.23e+3</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>固定小数</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">fixed:</span> <span class="number">13.67</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>正负无穷</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">minmin:</span> </span><br><span class="line"><span class="bullet"> -</span> <span class="string">+.inf</span></span><br><span class="line"><span class="bullet"> -</span> <span class="bullet">-.inf</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>无效数字</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">notNumber:</span> <span class="string">.NaN</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>字符串string</p>
+<ul>
+<li><p>直接写内容</p>
+<blockquote>
+<p>字符串默认是不需要使用符号表示</p>
+</blockquote>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">str:</span> <span class="string">这是一行字符串</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>单引号表示（转义）</p>
+<blockquote>
+<p>当字符串内有特殊字符（如冒号）时，需要使用单引号包裹。</p>
+<p>如果单引号中还有单引号，需要连续使用两个单引号以转义。</p>
+</blockquote>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">str:</span> <span class="string">'str: string'</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 字符串中包含单引号</span></span><br><span class="line"><span class="attr">s1:</span> <span class="string">'字符串'</span><span class="string">'字符串'</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 转义</span></span><br><span class="line"><span class="attr">s1:</span> <span class="string">'字符串\n字符串'</span></span><br><span class="line"><span class="string">&gt;&gt;&gt;</span> <span class="string">js</span></span><br><span class="line"><span class="string">&#123;s1:</span> <span class="string">'字符串\\n字符串'</span><span class="string">&#125;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>双引号表示（不转义）</p>
+<blockquote>
+<p>双引号与单引号的唯一区别是，双引号不对特殊字符进行转义。</p>
+</blockquote>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 不转义</span></span><br><span class="line"><span class="attr">s1:</span> <span class="string">'字符串\n字符串'</span></span><br><span class="line"><span class="string">&gt;&gt;&gt;</span> <span class="string">js</span></span><br><span class="line"><span class="string">&#123;s1:</span> <span class="string">'字符串\n字符串'</span><span class="string">&#125;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>
+<p>注1：换行的方式</p>
+<ol>
+<li><p>默认换行（类似markdown）</p>
+<blockquote>
+<p>结尾换行不保留，</p>
+<p>其他直观换行均只视为本质上的一个空格。（若连续换行，则视为换行符）</p>
+</blockquote>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&gt;    this: </span></span><br><span class="line"><span class="string">&gt;      Foo</span></span><br><span class="line"><span class="string">&gt;      Bar</span></span><br><span class="line"><span class="string">&gt;    &gt;&gt;&gt; js</span></span><br><span class="line"><span class="string">&gt;    &#123;this: 'Foo Bar'&#125;</span></span><br><span class="line"><span class="string">&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</blockquote>
+<blockquote>
+<ol start="2">
+<li><p>保留换行符 |</p>
+<blockquote>
+<p>结尾换行保留，</p>
+<blockquote>
+<p>其他直观换行均视为本质上的换行。</p>
+</blockquote>
+<p>（常用于插入html片段）</p>
+</blockquote>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&gt;   this: |</span></span><br><span class="line"><span class="string">&gt;     Foo</span></span><br><span class="line"><span class="string">&gt;     Bar</span></span><br><span class="line"><span class="string">&gt;   &gt;&gt;&gt; js</span></span><br><span class="line"><span class="string">&gt;   &#123;this: 'Foo\nBar\n'&#125;</span></span><br><span class="line"><span class="string">&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</blockquote>
+<blockquote>
+<ol start="3">
+<li><p>折叠换行 &gt;</p>
+<blockquote>
+<p>结尾换行保留，</p>
+<p>其他直观换行均只视为本质上的一个空格。（若连续换行，则视为换行符）</p>
+</blockquote>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&gt;    this: &gt;</span></span><br><span class="line"><span class="string">&gt;      Foo</span></span><br><span class="line"><span class="string">&gt;      Bar</span></span><br><span class="line"><span class="string">&gt;    &gt;&gt;&gt; js</span></span><br><span class="line"><span class="string">&gt;    &#123;this: 'Foo Bar\n'&#125;</span></span><br><span class="line"><span class="string">&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</blockquote>
+<blockquote>
+<p>注2：在保留换行和折叠换行基础之上对结尾换行符的处理</p>
+<blockquote>
+<p>结尾换行符修饰符直接添加在保留/折叠换行符之后</p>
+</blockquote>
+<ol>
+<li><p>默认结尾换行符只有一个，无论结尾多少换行</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&gt;    this: |</span></span><br><span class="line"><span class="string">&gt;      Foo</span></span><br><span class="line"><span class="string">&gt;      Bar</span></span><br><span class="line"><span class="string">&gt;      </span></span><br><span class="line"><span class="string">&gt;    &gt;&gt;&gt; js</span></span><br><span class="line"><span class="string">&gt;    &#123;this: 'Foo\nBar\n'&#125;</span></span><br><span class="line"><span class="string">&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</blockquote>
+<blockquote>
+<ol start="2">
+<li><p>保留结尾所有换行符 + ：有多少换行就多少换行符</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&gt;    this: |+</span></span><br><span class="line"><span class="string">&gt;      Foo</span></span><br><span class="line"><span class="string">&gt;      Bar</span></span><br><span class="line"><span class="string">&gt;      </span></span><br><span class="line"><span class="string">&gt;    &gt;&gt;&gt; js</span></span><br><span class="line"><span class="string">&gt;    &#123;this: 'Foo\nBar\n\n'&#125;</span></span><br><span class="line"><span class="string">&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</blockquote>
+<blockquote>
+<ol start="3">
+<li><p>删除结尾所有换行符 - ：无论多少换行都无换行符</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&gt;    this: |-</span></span><br><span class="line"><span class="string">&gt;      Foo</span></span><br><span class="line"><span class="string">&gt;      Bar</span></span><br><span class="line"><span class="string">&gt;      </span></span><br><span class="line"><span class="string">&gt;    &gt;&gt;&gt; js</span></span><br><span class="line"><span class="string">&gt;    &#123;this: 'Foo\nBar'&#125;</span></span><br><span class="line"><span class="string">&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</blockquote>
+</li>
+<li><p>布尔值boolean</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">boolean:</span> </span><br><span class="line"><span class="bullet"> -</span> <span class="literal">true</span></span><br><span class="line"><span class="bullet"> -</span> <span class="literal">false</span></span><br><span class="line"><span class="bullet"> -</span> <span class="literal">True</span></span><br><span class="line"><span class="bullet"> -</span> <span class="literal">False</span></span><br><span class="line"><span class="bullet"> -</span> <span class="literal">TRUE</span></span><br><span class="line"><span class="bullet"> -</span> <span class="literal">FALSE</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>空值null</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">null:</span></span><br><span class="line"><span class="bullet"> -</span> </span><br><span class="line"><span class="bullet"> -</span> <span class="string">~</span></span><br><span class="line"><span class="bullet"> -</span> <span class="literal">null</span></span><br><span class="line"><span class="bullet"> -</span> <span class="literal">Null</span></span><br><span class="line"><span class="bullet"> -</span> <span class="literal">NULL</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>时间</p>
+<blockquote>
+<p>时间采用iso8601格式。</p>
+</blockquote>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">iso8601:</span> <span class="number">2001</span><span class="bullet">-12</span><span class="bullet">-14</span><span class="attr">t21:59:43.10-05:00</span></span><br><span class="line"><span class="string">&gt;&gt;&gt;</span> <span class="string">js</span></span><br><span class="line"><span class="string">&#123;</span> <span class="attr">iso8601:</span> <span class="string">new</span> <span class="string">Date('2001-12-14t21:59:43.10-05:00')</span> <span class="string">&#125;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>日期</p>
+<blockquote>
+<p>日期采用复合 iso8601 格式的年月日格式。</p>
+</blockquote>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">date:</span> <span class="number">1976</span><span class="bullet">-07</span><span class="bullet">-31</span></span><br><span class="line"><span class="string">&gt;&gt;&gt;</span> <span class="string">js</span></span><br><span class="line"><span class="string">&#123;</span> <span class="attr">date:</span> <span class="string">new</span> <span class="string">Date('1976-07-31')</span> <span class="string">&#125;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<blockquote>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th><em>Regular expression</em></th>
+<th><em>Resolved to tag</em></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>**null \</td>
+<td>Null \</td>
+<td>NULL \</td>
+<td>~**</td>
+<td><strong>tag:yaml.org,2002:null</strong></td>
+</tr>
+<tr>
+<td><strong>/* Empty */</strong></td>
+<td><strong>tag:yaml.org,2002:null</strong></td>
+</tr>
+<tr>
+<td>**true \</td>
+<td>True \</td>
+<td>TRUE \</td>
+<td>false \</td>
+<td>False \</td>
+<td>FALSE**</td>
+<td><strong>tag:yaml.org,2002:bool</strong></td>
+</tr>
+<tr>
+<td><strong>[-+]? [0-9]+</strong></td>
+<td><strong>tag:yaml.org,2002:int</strong> <em>(Base 10)</em></td>
+</tr>
+<tr>
+<td><strong>0o [0-7]+</strong></td>
+<td><strong>tag:yaml.org,2002:int</strong> <em>(Base 8)</em></td>
+</tr>
+<tr>
+<td><strong>0x [0-9a-fA-F]+</strong></td>
+<td><strong>tag:yaml.org,2002:int</strong> <em>(Base 16)</em></td>
+</tr>
+<tr>
+<td>**[-+]? ( . [0-9]+ \</td>
+<td>[0-9]+ ( . [0-9]* )? ) ( [eE][-+]? [0-9]+ )?**</td>
+<td><strong>tag:yaml.org,2002:float</strong> <em>(Number)</em></td>
+</tr>
+<tr>
+<td>**[-+]? ( .inf \</td>
+<td>.Inf \</td>
+<td>.INF )**</td>
+<td><strong>tag:yaml.org,2002:float</strong> <em>(Infinity)</em></td>
+</tr>
+<tr>
+<td>**.nan \</td>
+<td>.NaN \</td>
+<td>.NAN**</td>
+<td><strong>tag:yaml.org,2002:float</strong> <em>(Not a number)</em></td>
+</tr>
+<tr>
+<td><strong>*</strong></td>
+<td><strong>tag:yaml.org,2002:str</strong> <em>(Default)</em></td>
+</tr>
+</tbody>
+</table>
+<h3 id="（二）映射mapping"><a href="#（二）映射mapping" class="headerlink" title="（二）映射mapping"></a>（二）映射mapping</h3><p>映射是指键值对的集合，键值之间用一个冒号和空格来隔开’: ‘，</p>
+<p>它类似于js的Object和python的dict。</p>
+<ol>
+<li><p>块映射：块集合表示</p>
+<blockquote>
+<p>块集合是指在范围内缩排等数目空格，建议2个空格。</p>
+<p>一行内容叫一个条目（entry）。</p>
+<p>块集合、映射、序列均叫集合（collections）。</p>
+</blockquote>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">fruit:</span> <span class="string">apple</span></span><br><span class="line"><span class="attr">pet:</span> <span class="string">dog</span></span><br><span class="line"><span class="string">&gt;&gt;&gt;</span> <span class="string">js</span></span><br><span class="line"><span class="string">&#123;fruit:</span> <span class="string">'apple'</span><span class="string">,</span> <span class="attr">pet:</span> <span class="string">'dog'</span><span class="string">&#125;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>流映射：流式表示（flow styles）</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&#123;fruit:</span> <span class="string">apple,</span> <span class="attr">pet:</span> <span class="string">dog&#125;</span></span><br><span class="line"><span class="string">&gt;&gt;&gt;</span> <span class="string">js</span></span><br><span class="line"><span class="string">&#123;fruit:</span> <span class="string">'apple'</span><span class="string">,</span> <span class="attr">pet:</span> <span class="string">'dog'</span><span class="string">&#125;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>复杂映射：以一个问号和空格开头的块集合</p>
+<blockquote>
+<p>当键是一个复杂的键时（如映射或序列），需要使用复杂映射来表示这样的关系。</p>
+<p>复杂映射的键值对可以在块集合内，直接跟在短横线、冒号、问号后。</p>
+</blockquote>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">?</span> <span class="bullet">-</span> <span class="string">hero1</span></span><br><span class="line"><span class="bullet">  -</span> <span class="string">hero2</span></span><br><span class="line"><span class="string">:</span></span><br><span class="line"><span class="bullet">  -</span> <span class="number">2018</span><span class="bullet">-08</span><span class="bullet">-28</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="（三）序列sequence"><a href="#（三）序列sequence" class="headerlink" title="（三）序列sequence"></a>（三）序列sequence</h3><p>序列是指有序的纯量列表，每一个序列的条目开头以一个短横线（dash符）和空格来隔开’- ‘，</p>
+<p>它类似于js的array和python的list。</p>
+<ol>
+<li><p>块序列：块集合表示</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">-</span> <span class="string">fruit</span></span><br><span class="line"><span class="bullet">-</span> <span class="string">pet</span></span><br><span class="line"><span class="string">&gt;&gt;&gt;</span> <span class="string">js</span></span><br><span class="line"><span class="string">['fruit',</span> <span class="string">'pet'</span><span class="string">]</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>流序列：流式表示</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">[fruit,</span> <span class="string">pet]</span></span><br><span class="line"><span class="string">&gt;&gt;&gt;</span> <span class="string">js</span></span><br><span class="line"><span class="string">['fruit',</span> <span class="string">'pet'</span><span class="string">]</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="（四）注释comment"><a href="#（四）注释comment" class="headerlink" title="（四）注释comment"></a>（四）注释comment</h3><p>yaml中只支持行注释，注释以一个井号（octothorpe）开头，也叫做hash、sharp、pound或数字标记’#’。</p>
+<p>注释可以放于任何位置，标示从注释符到行尾都是注释。</p>
+<h3 id="（五）引用"><a href="#（五）引用" class="headerlink" title="（五）引用"></a>（五）引用</h3><p>yaml中的引用指的是定义URI的锚点（anchor），再使用别名（alias）来引用它，这类似于其他语言中的变量定义和调用变量。</p>
+<ol>
+<li><p>纯量引用</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">pet:</span> <span class="meta">&amp;mypet</span> <span class="string">dog</span></span><br><span class="line"><span class="attr">hispet:</span> <span class="meta">*mypet</span></span><br><span class="line"><span class="string">&gt;&gt;&gt;</span> <span class="string">js</span></span><br><span class="line"><span class="string">&#123;pet:</span> <span class="string">'dog'</span><span class="string">,</span> <span class="attr">hispet:</span> <span class="string">'dog'</span><span class="string">&#125;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>集合引用</p>
+<blockquote>
+<p>集合引用在引用锚点时需要引入合并数据符号’&lt;&lt;’。</p>
+<p>合并数据符号能够把引用锚点的数据合并到当前数据。</p>
+<p>（或把别名直接写在’his: ‘后）</p>
+</blockquote>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">own:</span> <span class="meta">&amp;myown</span></span><br><span class="line"><span class="attr">  pet:</span> <span class="string">dog</span></span><br><span class="line"><span class="attr">  fruit:</span> <span class="string">apple</span></span><br><span class="line"><span class="attr">his:</span></span><br><span class="line">  <span class="string">&lt;&lt;:</span> <span class="meta">*myown</span></span><br><span class="line"><span class="string">&gt;&gt;&gt;</span> <span class="string">js</span></span><br><span class="line"><span class="string">&#123;</span> <span class="attr">own:</span> <span class="string">&#123;</span> <span class="attr">pet:</span> <span class="string">'dog'</span><span class="string">,</span> <span class="attr">fruit:</span> <span class="string">'apple'</span> <span class="string">&#125;,</span></span><br><span class="line"><span class="attr">  his:</span> <span class="string">&#123;</span> <span class="attr">pet:</span> <span class="string">'dog'</span><span class="string">,</span> <span class="attr">fruit:</span> <span class="string">'apple'</span> <span class="string">&#125;</span> <span class="string">&#125;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="五、其他概念"><a href="#五、其他概念" class="headerlink" title="五、其他概念"></a>五、其他概念</h2><h3 id="（一）节点nodes"><a href="#（一）节点nodes" class="headerlink" title="（一）节点nodes"></a>（一）节点nodes</h3><h3 id="（二）标签tags"><a href="#（二）标签tags" class="headerlink" title="（二）标签tags"></a>（二）标签tags</h3><h3 id="（三）指令directives"><a href="#（三）指令directives" class="headerlink" title="（三）指令directives"></a>（三）指令directives</h3><p>文档中的单一文件可以使用<strong>指导指令</strong>，使用方法是百分比符号(<strong>%</strong>)。有两个<a href="https://zh.wikipedia.org/wiki/%E7%B7%A8%E8%AD%AF%E7%A8%8B%E5%BC%8F%E5%AE%9A%E5%90%91" target="_blank" rel="noopener">指导指令</a>在YAML1.1版中被定义：</p>
+<ul>
+<li>%YAML 指令，用来识别文件的YAML版本。</li>
+<li>%TAG 指令，被用作URI前缀的缩写。这个方法可能用于在节点类型的标签中。</li>
+</ul>
+<h3 id="（四）保留字符"><a href="#（四）保留字符" class="headerlink" title="（四）保留字符"></a>（四）保留字符</h3><p>两个特殊符号在YAML中被保留，有可能在未来的版本被使用：（ <strong>@</strong> ）和（ <strong>`</strong> ）</p>
+<h2 id="六、其他功能"><a href="#六、其他功能" class="headerlink" title="六、其他功能"></a>六、其他功能</h2><h3 id="（一）js-yaml库"><a href="#（一）js-yaml库" class="headerlink" title="（一）js-yaml库"></a>（一）js-yaml库</h3><p>js-yaml库还能够识别yaml中的函数和正则表达式的字符串。</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># yaml文件名：example.yml</span></span><br><span class="line"><span class="attr">fn:</span> <span class="string">function</span> <span class="string">()</span> <span class="string">&#123;</span> <span class="string">return</span> <span class="number">1</span> <span class="string">&#125;</span></span><br><span class="line"><span class="attr">reg:</span> <span class="string">/test/</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"># js文件：example.yml --&gt; js</span><br><span class="line"><span class="keyword">var</span> yaml = <span class="built_in">require</span>(<span class="string">'js-yaml'</span>);</span><br><span class="line"><span class="keyword">var</span> fs   = <span class="built_in">require</span>(<span class="string">'fs'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">  <span class="keyword">var</span> doc = yaml.load(</span><br><span class="line">    fs.readFileSync(<span class="string">'./example.yml'</span>, <span class="string">'utf8'</span>)</span><br><span class="line">  );</span><br><span class="line">  <span class="built_in">console</span>.log(doc);</span><br><span class="line">&#125; <span class="keyword">catch</span> (e) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(e);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"># js文件：js --&gt; example.yml</span><br><span class="line"><span class="keyword">var</span> yaml = <span class="built_in">require</span>(<span class="string">'js-yaml'</span>);</span><br><span class="line"><span class="keyword">var</span> fs   = <span class="built_in">require</span>(<span class="string">'fs'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">	fn: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123; <span class="keyword">return</span> <span class="number">1</span> &#125;,</span><br><span class="line">    reg: <span class="regexp">/test/</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">  fs.writeFileSync(</span><br><span class="line">    <span class="string">'./example.yml'</span>,</span><br><span class="line">    yaml.dump(obj),</span><br><span class="line">    <span class="string">'utf8'</span></span><br><span class="line">  );</span><br><span class="line">&#125; <span class="keyword">catch</span> (e) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(e);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="七、附录"><a href="#七、附录" class="headerlink" title="七、附录"></a>七、附录</h2><p><img src="http://yaml.org/spec/1.2/serialize2.png" alt=""></p>
+
+    </article>
+    <!-- license  -->
+    
+        <div class="license-wrapper">
+            <p>原文作者: <a href="http://yoursite.com">Mooy Xu</a>
+            <p>原文链接: <a href="http://yoursite.com/2018/08/16/YAML_done/">http://yoursite.com/2018/08/16/YAML_done/</a>
+            <p>发表日期: <a href="http://yoursite.com/2018/08/16/YAML_done/">August 16th 2018, 10:26:04 am</a>
+            <p>版权声明: 本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
+        </div>
+    
+    <!-- paginator  -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href= "/2018/08/08/计算机时间以及NTP_done/" title= NTP >
+                    <div class="prevTitle">NTP</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+<!-- City版安装代码已完成 -->
+    
+    
+    <!--PC和WAP自适应版-->
+
+    <!--PC版-->
+
+
+    
+    
+
+    <!-- 评论 -->
+</main>
+            <!-- profile -->
+            
+        </div>
+        <footer class="footer footer-unloaded">
+    <!-- social  -->
+    
+    <div class="social">
+        
+    
+        
+            
+                <a href="mailto:xumengyu2008@qq.com" class="iconfont-archer email" title=email ></a>
+            
+        
+    
+        
+            
+                <a href="//github.com/mooyxu" class="iconfont-archer github" target="_blank" title=github></a>
+            
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+            
+                <a href="//www.baidu.com" class="iconfont-archer baidu" target="_blank" title=baidu></a>
+            
+        
+    
+        
+            
+                <a href="//www.google.com" class="iconfont-archer google" target="_blank" title=google></a>
+            
+        
+    
+        
+    
+
+    </div>
+    
+    <!-- powered by Hexo  -->
+    <div class="copyright">
+        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span><span id="theme-info">theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">Archer</a></span>
+    </div>
+    <!-- 不蒜子  -->
+    
+    <div class="busuanzi-container">
+    
+     
+    <span id="busuanzi_container_site_pv">PV: <span id="busuanzi_value_site_pv"></span> :)</span>
+    
+    </div>
+    
+</footer>
+    </div>
+    <!-- toc -->
+    
+    <div class="toc-wrapper" style=
+    
+
+
+
+
+
+
+
+top:50vh;
+
+    >
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#YAML"><span class="toc-number">1.</span> <span class="toc-text">YAML</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、概览"><span class="toc-number">1.1.</span> <span class="toc-text">一、概览</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、基本规范"><span class="toc-number">1.2.</span> <span class="toc-text">二、基本规范</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三、宏观结构"><span class="toc-number">1.3.</span> <span class="toc-text">三、宏观结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#四、微观数据（核心类型）"><span class="toc-number">1.4.</span> <span class="toc-text">四、微观数据（核心类型）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#（一）纯量scalars"><span class="toc-number">1.4.1.</span> <span class="toc-text">（一）纯量scalars</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#（二）映射mapping"><span class="toc-number">1.4.2.</span> <span class="toc-text">（二）映射mapping</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#（三）序列sequence"><span class="toc-number">1.4.3.</span> <span class="toc-text">（三）序列sequence</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#（四）注释comment"><span class="toc-number">1.4.4.</span> <span class="toc-text">（四）注释comment</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#（五）引用"><span class="toc-number">1.4.5.</span> <span class="toc-text">（五）引用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#五、其他概念"><span class="toc-number">1.5.</span> <span class="toc-text">五、其他概念</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#（一）节点nodes"><span class="toc-number">1.5.1.</span> <span class="toc-text">（一）节点nodes</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#（二）标签tags"><span class="toc-number">1.5.2.</span> <span class="toc-text">（二）标签tags</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#（三）指令directives"><span class="toc-number">1.5.3.</span> <span class="toc-text">（三）指令directives</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#（四）保留字符"><span class="toc-number">1.5.4.</span> <span class="toc-text">（四）保留字符</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#六、其他功能"><span class="toc-number">1.6.</span> <span class="toc-text">六、其他功能</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#（一）js-yaml库"><span class="toc-number">1.6.1.</span> <span class="toc-text">（一）js-yaml库</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#七、附录"><span class="toc-number">1.7.</span> <span class="toc-text">七、附录</span></a></li></ol></li></ol>
+    </div>
+    
+    <div class="back-top iconfont-archer">&#xe639;</div>
+    <div class="sidebar sidebar-hide">
+    <ul class="sidebar-tabs sidebar-tabs-active-0">
+        <li class="sidebar-tab-archives"><span class="iconfont-archer">&#xe67d;</span><span class="tab-name">Archive</span></li>
+        <li class="sidebar-tab-tags"><span class="iconfont-archer">&#xe61b;</span><span class="tab-name">Tag</span></li>
+        <li class="sidebar-tab-categories"><span class="iconfont-archer">&#xe666;</span><span class="tab-name">Cate</span></li>
+    </ul>
+    <div class="sidebar-content sidebar-content-show-archive">
+          <div class="sidebar-panel-archives">
+    <!-- 在ejs中将archive按照时间排序 -->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-and-search">
+        <div class="total-archive">
+        Total : 5
+        </div>
+        <!-- search  -->
+        
+    </div>
+    
+    <div class="post-archive">
+    
+    
+    
+    
+    <div class="archive-year"> 2018 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/08</span><a class="archive-post-title" href= "/2018/08/08/计算机时间以及NTP_done/" >NTP</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> Invalid date </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2018/07/05/Markdown_done/" >Markdown总结</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2018 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/01</span><a class="archive-post-title" href= "/2018/08/01/Javascript_test/" >test for javascript</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> Invalid date </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2018/08/16/YAML_done/" >YAML</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2018 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/31</span><a class="archive-post-title" href= "/2018/07/31/Hexo_done/" >Hexo总结</a>
+        </li>
+    
+    </div>
+  </div>
+        <div class="sidebar-panel-tags">
+    <div class="sidebar-tags-name">
+    
+    </div>
+    <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+    缺失模块。<br/>
+    1、请确保node版本大于6.2<br/>
+    2、在博客根目录（注意不是archer根目录）执行以下命令：<br/>
+    <span style="color: #f75357; font-size: 1rem; line-height: 2rem;">npm i hexo-generator-json-content --save</span><br/>
+    3、在根目录_config.yml里添加配置：
+    <pre style="color: #787878; font-size: 0.6rem;">
+jsonContent:
+  meta: false
+  pages: false
+  posts:
+    title: true
+    date: true
+    path: true
+    text: false
+    raw: false
+    content: false
+    slug: false
+    updated: false
+    comments: false
+    link: false
+    permalink: false
+    excerpt: false
+    categories: true
+    tags: true</pre>
+    </div> 
+    <div class="sidebar-tags-list"></div>
+</div>
+        <div class="sidebar-panel-categories">
+    <div class="sidebar-categories-name">
+    
+        <span class="sidebar-category-name" data-categories="Language"><span class="iconfont-archer">&#xe60a;</span>Language</span>
+    
+        <span class="sidebar-category-name" data-categories="Language/Markdown"><span class="iconfont-archer">&#xe60a;</span>Language/Markdown</span>
+    
+    </div>
+    <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
+    <div class="sidebar-categories-list"></div>
+</div>
+    </div>
+</div> 
+    <script>
+    var siteMeta = {
+        root: "/",
+        author: "Mooy Xu"
+    }
+</script>
+    <!-- CDN failover -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+    <script type="text/javascript">
+        if (typeof window.$ === 'undefined')
+        {
+            console.warn('jquery load from jsdelivr failed, will load local script')
+            document.write('<script src="/lib/jquery.min.js">\x3C/script>')
+        }
+    </script>
+    <script src="/scripts/main.js"></script>
+    <!-- algolia -->
+    
+    <!-- busuanzi  -->
+    
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+    <!-- CNZZ  -->
+    
+    </div>
+    <!-- async load share.js -->
+    
+        <script src="/scripts/share.js" async></script>    
+     
+    </body>
+</html>
+
+
