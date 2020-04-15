@@ -1,884 +1,1226 @@
 <!DOCTYPE html>
-<html>
-    <!-- title -->
-
-
-
-
+<html lang="zh-cmn">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" >
-    <meta name="author" content="Mooy Xu">
-    <meta name="renderer" content="webkit">
-    <meta name="copyright" content="Mooy Xu">
-    <meta name="keywords" content="Mooy | Mooy Xu">
-    <meta name="description" content="code">
-    <meta name="Cache-Control" content="no-cache">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    <title>Mooy Xu</title>
-    <style type="text/css">
-    @font-face {
-        font-family: 'Oswald-Regular';
-        src: url("/font/Oswald-Regular.ttf");
-    }
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.7.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
-    body {
-        margin: 0;
-    }
-
-    header,
-    footer,
-    .back-top,
-    .sidebar,
-    .container,
-    .site-intro-meta,
-    .toc-wrapper {
-        display: none;
-    }
-
-    .site-intro {
-        position: relative;
-        z-index: 3;
-        width: 100%;
-        /* height: 50vh; */
-        overflow: hidden;
-    }
-
-    .site-intro-placeholder {
-        position: absolute;
-        z-index: -2;
-        top: 0;
-        left: 0;
-        width: calc(100% + 300px);
-        height: 100%;
-        background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
-        background-position: center center;
-        transform: translate3d(-226px, 0, 0);
-        animation: gradient-move 2.5s ease-out 0s 1;
-    }
-
-    @keyframes gradient-move {
-        0% {
-            transform: translate3d(-226px, 0, 0);
-        }
-        100% {
-            transform: translate3d(0, 0, 0);
-        }
-    }
-
-</style>
-
-    <link rel="preload" href= /css/style.css?v=20180721 as="style" onload="this.onload=null;this.rel='stylesheet'" />
-    <link rel="stylesheet" href= /css/mobile.css?v=20180721 media="(max-width: 980px)">
-    
-    <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
-/* This file is meant as a standalone workflow for
-- testing support for link[rel=preload]
-- enabling async CSS loading in browsers that do not support rel=preload
-- applying rel preload css once loaded, whether supported or not.
-*/ -->
-<script>
-(function( w ){
-	"use strict";
-	// rel=preload support test
-	if( !w.loadCSS ){
-		w.loadCSS = function(){};
-	}
-	// define on the loadCSS obj
-	var rp = loadCSS.relpreload = {};
-	// rel=preload feature support test
-	// runs once and returns a function for compat purposes
-	rp.support = (function(){
-		var ret;
-		try {
-			ret = w.document.createElement( "link" ).relList.supports( "preload" );
-		} catch (e) {
-			ret = false;
-		}
-		return function(){
-			return ret;
-		};
-	})();
-
-	// if preload isn't supported, get an asynchronous load by using a non-matching media attribute
-	// then change that media back to its intended value on load
-	rp.bindMediaToggle = function( link ){
-		// remember existing media attr for ultimate state, or default to 'all'
-		var finalMedia = link.media || "all";
-
-		function enableStylesheet(){
-			link.media = finalMedia;
-		}
-
-		// bind load handlers to enable media
-		if( link.addEventListener ){
-			link.addEventListener( "load", enableStylesheet );
-		} else if( link.attachEvent ){
-			link.attachEvent( "onload", enableStylesheet );
-		}
-
-		// Set rel and non-applicable media type to start an async request
-		// note: timeout allows this to happen async to let rendering continue in IE
-		setTimeout(function(){
-			link.rel = "stylesheet";
-			link.media = "only x";
-		});
-		// also enable media after 3 seconds,
-		// which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
-		setTimeout( enableStylesheet, 3000 );
-	};
-
-	// loop through link elements in DOM
-	rp.poly = function(){
-		// double check this to prevent external calls from running
-		if( rp.support() ){
-			return;
-		}
-		var links = w.document.getElementsByTagName( "link" );
-		for( var i = 0; i < links.length; i++ ){
-			var link = links[ i ];
-			// qualify links to those with rel=preload and as=style attrs
-			if( link.rel === "preload" && link.getAttribute( "as" ) === "style" && !link.getAttribute( "data-loadcss" ) ){
-				// prevent rerunning on link
-				link.setAttribute( "data-loadcss", true );
-				// bind listeners to toggle media back
-				rp.bindMediaToggle( link );
-			}
-		}
-	};
-
-	// if unsupported, run the polyfill
-	if( !rp.support() ){
-		// run once at least
-		rp.poly();
-
-		// rerun poly on an interval until onload
-		var run = w.setInterval( rp.poly, 500 );
-		if( w.addEventListener ){
-			w.addEventListener( "load", function(){
-				rp.poly();
-				w.clearInterval( run );
-			} );
-		} else if( w.attachEvent ){
-			w.attachEvent( "onload", function(){
-				rp.poly();
-				w.clearInterval( run );
-			} );
-		}
-	}
+<link rel="stylesheet" href="/css/main.css">
 
 
-	// commonjs
-	if( typeof exports !== "undefined" ){
-		exports.loadCSS = loadCSS;
-	}
-	else {
-		w.loadCSS = loadCSS;
-	}
-}( typeof global !== "undefined" ? global : this ) );
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="code">
+<meta name="keywords" content="code">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Mooy">
+<meta property="og:url" content="http://yoursite.com/index.html">
+<meta property="og:site_name" content="Mooy">
+<meta property="og:description" content="code">
+<meta property="og:locale" content="zh-cmn">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Mooy">
+<meta name="twitter:description" content="code">
+
+<link rel="canonical" href="http://yoursite.com/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : true,
+    isPost : false,
+    lang   : 'zh-cmn'
+  };
 </script>
 
-    <link rel="icon" href= "/assets/favicon.ico" />
-    <link rel="preload" href="https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js" as="script" />
-    <link rel="preload" href="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js" as="script" />
-    <link rel="preload" href="/scripts/main.js" as="script" />
-    <link rel="preload" as="font" href="/font/Oswald-Regular.ttf" crossorigin>
-    <link rel="preload" as="font" href="https://at.alicdn.com/t/font_327081_1dta1rlogw17zaor.woff" crossorigin>
-    
-    <!-- fancybox -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" defer></script>
-    <!-- 百度统计  -->
-    
-    <!-- 谷歌统计  -->
-    
+  <title>Mooy</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
 </head>
 
-    
-        <body class="home-body">
-    
-    
-<header class="header index-header">
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
 
-    <div class="read-progress"></div>
-    <div class="header-sidebar-menu">&#xe775;</div>
-    <!-- post页的toggle banner  -->
-    
-    <a class="home-link" href=/>MOOY XU</a>
-</header>
-    <div class="wrapper">
-        <div class="site-intro" style=
-
-
-
-
-
-
-
-
-height:50vh;
-
->
-    
-    <!-- 主页  -->
-    
-    
-    <!-- 文章页  -->
-            
-    <div class="site-intro-placeholder"></div>
-    <div class="site-intro-img" style="background-image: url(/intro/index-bg.jpg)"></div>
-    <div class="site-intro-meta">
-        <!-- 标题  -->
-        <h1 class="intro-title">
-            <!-- 主页  -->
-            
-            MOOY XU
-            <!-- 文章页  -->
-            
-        </h1>
-        <!-- 副标题 -->
-        <p class="intro-subtitle">
-            <!-- 主页副标题  -->
-            
-            
-                artistic, creative & imaginative with code.
-            
-            <!-- 文章页  -->
-            
-        </p>
-        <!-- 文章页meta -->
-        
-    </div>
-</div>
-        <script>
- 
-  // get user agent
-  var browser = {
-    versions: function () {
-      var u = window.navigator.userAgent;
-      return {
-        userAgent: u,
-        trident: u.indexOf('Trident') > -1, //IE内核
-        presto: u.indexOf('Presto') > -1, //opera内核
-        webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
-        gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
-        mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
-        ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
-        android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
-        iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
-        iPad: u.indexOf('iPad') > -1, //是否为iPad
-        webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
-        weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
-        uc: u.indexOf('UCBrowser') > -1 //是否为android下的UC浏览器
-      };
-    }()
-  }
-  console.log("userAgent:" + browser.versions.userAgent);
-
-  // callback
-  function fontLoaded() {
-    console.log('font loaded');
-    if (document.getElementsByClassName('site-intro-meta')) {
-      document.getElementsByClassName('intro-title')[0].classList.add('intro-fade-in');
-      document.getElementsByClassName('intro-subtitle')[0].classList.add('intro-fade-in');
-      var postIntros = document.getElementsByClassName('post-intros')[0]
-      if (postIntros) {
-        postIntros.classList.add('post-fade-in');
-      }
-    }
-  }
-
-  // UC不支持跨域，所以直接显示
-  function asyncCb(){
-    if (browser.versions.uc) {
-      console.log("UCBrowser");
-      fontLoaded();
-    } else {
-      WebFont.load({
-        custom: {
-          families: ['Oswald-Regular']
-        },
-        loading: function () {  //所有字体开始加载
-          // console.log('loading');
-        },
-        active: function () {  //所有字体已渲染
-          fontLoaded();
-        },
-        inactive: function () { //字体预加载失败，无效字体或浏览器不支持加载
-          console.log('inactive: timeout');
-          fontLoaded();
-        },
-        timeout: 5000 // Set the timeout to two seconds
-      });
-    }
-  }
-
-  function asyncErr(){
-    console.warn('script load from CDN failed, will load local script')
-  }
-
-  // load webfont-loader async, and add callback function
-  function async(u, cb, err) {
-    var d = document, t = 'script',
-      o = d.createElement(t),
-      s = d.getElementsByTagName(t)[0];
-    o.src = u;
-    if (cb) { o.addEventListener('load', function (e) { cb(null, e); }, false); }
-    if (err) { o.addEventListener('error', function (e) { err(null, e); }, false); }
-    s.parentNode.insertBefore(o, s);
-  }
-
-  var asyncLoadWithFallBack = function(arr, success, reject) {
-      var currReject = function(){
-        reject()
-        arr.shift()
-        if(arr.length)
-          async(arr[0], success, currReject)
-        }
-
-      async(arr[0], success, currReject)
-  }
-
-  asyncLoadWithFallBack([
-    "https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js", 
-    "https://cdn.bootcss.com/webfont/1.6.28/webfontloader.js",
-    "/lib/webfontloader.min.js"
-  ], asyncCb, asyncErr)
-</script>        
-        <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
-        <div class="container container-unloaded">
-            <main class="main index-page">
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2018/08/16/YAML_done/" >
-            
-                <span>YAML</span>
-        </a>
-        <div class="abstract-content">
-            YAML
-简介：YAML是一门数据序列化语言。它最初设计用来做数据存储和传递的常见案例，如配置文件、日志文件、进程间传递数据、跨语言信息共享等，其中尤以配置文件为重。由于它使用了常用的灵活编程语言中的原生基本数据类型，并且使用了Unicode编码，所以它有着跨语言的特性。也因为语法的简洁，所以它更适宜于人类阅读。从功能上，YAML还是JSON的父级。
-YAML：YAML Ain’t Markup Language.
-官方文档：http://yaml.org/spec/1.2/spec.html
-yaml-json：http://www.bejson.com/validators/yaml...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/08/16</span>
-            </div>
-            <!-- tags  -->
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2018/08/08/计算机时间以及NTP_done/" >
-            
-                <span>NTP</span>
-        </a>
-        <div class="abstract-content">
-            同步计算机时间的协议 —— NTP[TOC]
-一、背景早前时间的标准是什么？​    地球自转的客观规律：
-
-恒星日：地球自转一圈，即转360度，称为一个恒星日，需要23小时56分4.09894秒。
-
-要想测量地球自转了360度，需要有一个参照物（测量同一经线两次正对该参照物的时间差）。在宇宙中，其他物体也都是在运动的，而越近的物体相对地球运动的角度就会更大，造成的误差就更大，所以选择以很遥远的恒星作为参照物，这样可以减少误差甚至忽略不计。
-这也是把自转360度称为一个恒星日的由来。
-
-
-真太阳日：如果始终以太阳为参照物，由于地球自转时还在公转，因此同一经线从第一次到第二次正对太阳，地球...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/08/08</span>
-            </div>
-            <!-- tags  -->
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2018/08/01/Javascript_test/" >
-            
-                <span>test for javascript</span>
-        </a>
-        <div class="abstract-content">
-            test
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/08/01</span>
-            </div>
-            <!-- tags  -->
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2018/07/31/Hexo_done/" >
-            
-                <span>Hexo总结</span>
-        </a>
-        <div class="abstract-content">
-            Hexo
-简介：hexo是个博客系统，它的数据可以存储在本地，也支持推送到远程服务器，并且方便迁移且使用通用的Markdown来写作。
-
-
-官网：Hexo
-官方文档：documentation
-Issues：troubleshooting
-Github：GitHub
-
-一、搭建1234567891011121314151617181920212223# 1.install [Git]Mac: brew install gitUbuntu: sudo apt-get install gitCentOS: sudo yum install git&gt; git --version# 2.i...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/07/31</span>
-            </div>
-            <!-- tags  -->
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2018/07/05/Markdown_done/" >
-            
-                <span>Markdown总结</span>
-        </a>
-        <div class="abstract-content">
-            Markdown
-简介：markdown是一门轻量级的语言，用来记录文本信息：文章、笔记等。它比单纯的txt文本拥有更多的内容格式，却不像html/xml那样有复杂且不直观的语法。现在它已经被广泛使用，且能对其他的复杂格式转化：html、pdf等。
-
-
-语法简介：markdown分为区块元素和区段元素，对应html中的块级元素(block)和行级元素(inline)。
-
-区块元素有段落、标题、区块引用、列表、代码区块、分隔线。
-区段元素有链接、强调、代码、图片。
-其他还有反斜杠、自动链接等。
-
-下面用以字符串和正则表达式组成的伪代码，配合示例，来展示。
-
-[TOC]
-一、结构（一）段落和...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/07/05</span>
-            </div>
-            <!-- tags  -->
-            
-        </div>
-    </article>
-    
-    <!-- paginator  -->
-    
-</main>
-            <!-- profile -->
-            
-            <div class="profile">
-    <img class="profile-avatar" src= /avatar/Crayon.jpg >
-    <div class="profile-name">Mooy Xu</div>
-    
-    <div class="profile-signature">
-        art &amp; code
-    </div>
-    
-    
-    <div class="profile-social">
-        
-    
-        
-            
-                <a href="mailto:xumengyu2008@qq.com" class="iconfont-archer email" title=email ></a>
-            
-        
-    
-        
-            
-                <a href="//github.com/mooyxu" class="iconfont-archer github" target="_blank" title=github></a>
-            
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-            
-                <a href="//www.baidu.com" class="iconfont-archer baidu" target="_blank" title=baidu></a>
-            
-        
-    
-        
-            
-                <a href="//www.google.com" class="iconfont-archer google" target="_blank" title=google></a>
-            
-        
-    
-        
-    
-
-    </div>
-    
-    
-    
-        <div class="about-me">
-            <a href = "/about" >ABOUT ME</a>
-        </div>
-    
-</div>
-            
-        </div>
-        <footer class="footer footer-unloaded">
-    <!-- social  -->
-    
-    <div class="social">
-        
-    
-        
-            
-                <a href="mailto:xumengyu2008@qq.com" class="iconfont-archer email" title=email ></a>
-            
-        
-    
-        
-            
-                <a href="//github.com/mooyxu" class="iconfont-archer github" target="_blank" title=github></a>
-            
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-            
-                <a href="//www.baidu.com" class="iconfont-archer baidu" target="_blank" title=baidu></a>
-            
-        
-    
-        
-            
-                <a href="//www.google.com" class="iconfont-archer google" target="_blank" title=google></a>
-            
-        
-    
-        
-    
-
-    </div>
-    
-    <!-- powered by Hexo  -->
-    <div class="copyright">
-        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span><span id="theme-info">theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">Archer</a></span>
-    </div>
-    <!-- 不蒜子  -->
-    
-    <div class="busuanzi-container">
-    
-     
-    <span id="busuanzi_container_site_pv">PV: <span id="busuanzi_value_site_pv"></span> :)</span>
-    
-    </div>
-    
-</footer>
-    </div>
-    <!-- toc -->
-    
-    <div class="back-top iconfont-archer">&#xe639;</div>
-    <div class="sidebar sidebar-hide">
-    <ul class="sidebar-tabs sidebar-tabs-active-0">
-        <li class="sidebar-tab-archives"><span class="iconfont-archer">&#xe67d;</span><span class="tab-name">Archive</span></li>
-        <li class="sidebar-tab-tags"><span class="iconfont-archer">&#xe61b;</span><span class="tab-name">Tag</span></li>
-        <li class="sidebar-tab-categories"><span class="iconfont-archer">&#xe666;</span><span class="tab-name">Cate</span></li>
-    </ul>
-    <div class="sidebar-content sidebar-content-show-archive">
-          <div class="sidebar-panel-archives">
-    <!-- 在ejs中将archive按照时间排序 -->
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    <div class="total-and-search">
-        <div class="total-archive">
-        Total : 5
-        </div>
-        <!-- search  -->
-        
-    </div>
-    
-    <div class="post-archive">
-    
-    
-    
-    
-    <div class="archive-year"> 2018 </div>
-    <ul class="year-list">
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">08/08</span><a class="archive-post-title" href= "/2018/08/08/计算机时间以及NTP_done/" >NTP</a>
-        </li>
-    
-    
-    
-    
-    
-        </ul>
-    
-    <div class="archive-year"> Invalid date </div>
-    <ul class="year-list">
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2018/07/05/Markdown_done/" >Markdown总结</a>
-        </li>
-    
-    
-    
-    
-    
-        </ul>
-    
-    <div class="archive-year"> 2018 </div>
-    <ul class="year-list">
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">08/01</span><a class="archive-post-title" href= "/2018/08/01/Javascript_test/" >test for javascript</a>
-        </li>
-    
-    
-    
-    
-    
-        </ul>
-    
-    <div class="archive-year"> Invalid date </div>
-    <ul class="year-list">
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2018/08/16/YAML_done/" >YAML</a>
-        </li>
-    
-    
-    
-    
-    
-        </ul>
-    
-    <div class="archive-year"> 2018 </div>
-    <ul class="year-list">
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">07/31</span><a class="archive-post-title" href= "/2018/07/31/Hexo_done/" >Hexo总结</a>
-        </li>
-    
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
     </div>
   </div>
-        <div class="sidebar-panel-tags">
-    <div class="sidebar-tags-name">
-    
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Mooy</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">code</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
     </div>
-    <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
-    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
-    缺失模块。<br/>
-    1、请确保node版本大于6.2<br/>
-    2、在博客根目录（注意不是archer根目录）执行以下命令：<br/>
-    <span style="color: #f75357; font-size: 1rem; line-height: 2rem;">npm i hexo-generator-json-content --save</span><br/>
-    3、在根目录_config.yml里添加配置：
-    <pre style="color: #787878; font-size: 0.6rem;">
-jsonContent:
-  meta: false
-  pages: false
-  posts:
-    title: true
-    date: true
-    path: true
-    text: false
-    raw: false
-    content: false
-    slug: false
-    updated: false
-    comments: false
-    link: false
-    permalink: false
-    excerpt: false
-    categories: true
-    tags: true</pre>
-    </div> 
-    <div class="sidebar-tags-list"></div>
+  </div>
 </div>
-        <div class="sidebar-panel-categories">
-    <div class="sidebar-categories-name">
-    
-        <span class="sidebar-category-name" data-categories="Language"><span class="iconfont-archer">&#xe60a;</span>Language</span>
-    
-        <span class="sidebar-category-name" data-categories="Language/Markdown"><span class="iconfont-archer">&#xe60a;</span>Language/Markdown</span>
-    
-    </div>
-    <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
-    <div class="sidebar-categories-list"></div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
 </div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content index posts-expand">
+            
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cmn">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/16/YAML_done/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Mooy Xu">
+      <meta itemprop="description" content="code">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mooy">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/08/16/YAML_done/" class="post-title-link" itemprop="url">YAML</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2018-08-16 10:26:04" itemprop="dateCreated datePublished" datetime="2018-08-16T10:26:04+08:00">2018-08-16</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2018-08-20 16:52:11" itemprop="dateModified" datetime="2018-08-20T16:52:11+08:00">2018-08-20</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="YAML"><a href="#YAML" class="headerlink" title="YAML"></a>YAML</h1><blockquote>
+<p>简介：YAML是一门数据序列化语言。它最初设计用来做数据存储和传递的常见案例，如配置文件、日志文件、进程间传递数据、跨语言信息共享等，其中尤以配置文件为重。由于它使用了常用的灵活编程语言中的原生基本数据类型，并且使用了Unicode编码，所以它有着跨语言的特性。也因为语法的简洁，所以它更适宜于人类阅读。从功能上，YAML还是JSON的父级。</p>
+<p>YAML：YAML Ain’t Markup Language.</p>
+<p>官方文档：<a href="http://yaml.org/spec/1.2/spec.html" target="_blank" rel="noopener">http://yaml.org/spec/1.2/spec.html</a></p>
+<p>yaml-json：<a href="http://www.bejson.com/validators/yaml_editor/" target="_blank" rel="noopener">http://www.bejson.com/validators/yaml_editor/</a></p>
+</blockquote>
+<p>[TOC]</p>
+<h2 id="一、概览"><a href="#一、概览" class="headerlink" title="一、概览"></a>一、概览</h2><p>yaml中的数据类型可以分为三大类：核心类型（core）、定义类型（defined）、用户定义类型（user-defined）。</p>
+<ol>
+<li><p>核心类型包含三个基本元素（映射、序列、纯量），它们可以被所有解析器直接解析。</p>
+<blockquote>
+<p>每门语言都有着自己的数据结构（data structures），但是都围绕着三个基本元素：</p>
+<ol>
+<li>映射mappings：也叫哈希hashes、字典dictionary、对象objects。</li>
+<li>序列sequences：也叫数组arrays、列表lists。</li>
+<li>纯量scalars：有字符串strings、数字numbers等。</li>
+</ol>
+<p>而yaml就是利用这三个基本元素，增加了类型系统和别名机制，形成了一门可以序列化任何原生数据结构的语言。</p>
+</blockquote>
+</li>
+<li><p>定义类型是指yaml有定义的所有类型，但是并非所有解析起都能解析这些类型。</p>
+</li>
+<li><p>用户定义类型是指用户自定义出的类型。</p>
+</li>
+</ol>
+<p>特殊情况下，我们使用双感叹号对这些类型进行强制转换。</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 定义类型</span></span><br><span class="line"><span class="type">!!int</span>               <span class="comment"># 整数类型</span></span><br><span class="line"><span class="type">!!float</span>             <span class="comment"># 浮点类型</span></span><br><span class="line"><span class="type">!!bool</span>              <span class="comment"># 布尔类型</span></span><br><span class="line"><span class="type">!!str</span>               <span class="comment"># 字符串类型</span></span><br><span class="line"><span class="type">!!binary</span>            <span class="comment"># 也是字符串类型</span></span><br><span class="line"><span class="type">!!timestamp</span>         <span class="comment"># 日期时间类型</span></span><br><span class="line"><span class="type">!!null</span>              <span class="comment"># 空值</span></span><br><span class="line"><span class="type">!!set</span>               <span class="comment"># 集合</span></span><br><span class="line"><span class="type">!!omap</span><span class="string">,</span> <span class="type">!!pairs</span>     <span class="comment"># 键值列表或对象列表</span></span><br><span class="line"><span class="type">!!seq</span>               <span class="comment"># 序列，也是列表</span></span><br><span class="line"><span class="type">!!map</span>               <span class="comment"># 键值表</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 强制转换示例</span></span><br><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">str:</span> <span class="string">!str</span> <span class="number">123</span></span><br><span class="line"><span class="string">...</span></span><br><span class="line"><span class="bullet">-</span><span class="bullet">--</span> <span class="type">!!str</span></span><br><span class="line"><span class="attr">str:</span> <span class="number">123</span></span><br><span class="line"><span class="string">...</span></span><br></pre></td></tr></table></figure>
+<h2 id="二、基本规范"><a href="#二、基本规范" class="headerlink" title="二、基本规范"></a>二、基本规范</h2><ol>
+<li>YAML使用unicode编码，常用utf-8。</li>
+<li>YAML大小写敏感。</li>
+<li>YAML缩进只用空格，建议使用俩空格。</li>
+<li>YAML同一层级使用等量缩进表示，称为块集合。（同python）</li>
+</ol>
+<h2 id="三、宏观结构"><a href="#三、宏观结构" class="headerlink" title="三、宏观结构"></a>三、宏观结构</h2><p>yaml文件可以包含一个或多个yaml文档，yaml文档是yaml文件的基本组成单位。</p>
+<p>一个yaml文档以三个短横线开头，三个点结尾（可省略），以标示它的独立范围。</p>
+<p>当yaml文件中只有一个yaml文档时，短横线标示符也可以省略。</p>
+<p>此外，三个短横线还可以把指令（directives）从文档文本中分隔出来。</p>
+<h2 id="四、微观数据（核心类型）"><a href="#四、微观数据（核心类型）" class="headerlink" title="四、微观数据（核心类型）"></a>四、微观数据（核心类型）</h2><h3 id="（一）纯量scalars"><a href="#（一）纯量scalars" class="headerlink" title="（一）纯量scalars"></a>（一）纯量scalars</h3><ol>
+<li><p>数字类型</p>
+<ul>
+<li><p>整数init</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">integer:</span> <span class="number">12345</span>     <span class="comment"># 十进制</span></span><br><span class="line"><span class="attr">octal:</span> <span class="number">0</span><span class="string">o34</span>        <span class="comment"># 八进制，第二个是字母 o</span></span><br><span class="line"><span class="attr">hex:</span> <span class="number">0xFF</span>          <span class="comment"># 十六进制</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>浮点数float</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">float:</span> <span class="number">1.23e+3</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>固定小数</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">fixed:</span> <span class="number">13.67</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>正负无穷</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">minmin:</span> </span><br><span class="line"><span class="bullet"> -</span> <span class="string">+.inf</span></span><br><span class="line"><span class="bullet"> -</span> <span class="bullet">-.inf</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>无效数字</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">notNumber:</span> <span class="string">.NaN</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>字符串string</p>
+<ul>
+<li><p>直接写内容</p>
+<blockquote>
+<p>字符串默认是不需要使用符号表示</p>
+</blockquote>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">str:</span> <span class="string">这是一行字符串</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>单引号表示（转义）</p>
+<blockquote>
+<p>当字符串内有特殊字符（如冒号）时，需要使用单引号包裹。</p>
+<p>如果单引号中还有单引号，需要连续使用两个单引号以转义。</p>
+</blockquote>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">str:</span> <span class="string">'str: string'</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 字符串中包含单引号</span></span><br><span class="line"><span class="attr">s1:</span> <span class="string">'字符串'</span><span class="string">'字符串'</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 转义</span></span><br><span class="line"><span class="attr">s1:</span> <span class="string">'字符串\n字符串'</span></span><br><span class="line"><span class="string">&gt;&gt;&gt;</span> <span class="string">js</span></span><br><span class="line"><span class="string">&#123;s1:</span> <span class="string">'字符串\\n字符串'</span><span class="string">&#125;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>双引号表示（不转义）</p>
+<blockquote>
+<p>双引号与单引号的唯一区别是，双引号不对特殊字符进行转义。</p>
+</blockquote>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 不转义</span></span><br><span class="line"><span class="attr">s1:</span> <span class="string">'字符串\n字符串'</span></span><br><span class="line"><span class="string">&gt;&gt;&gt;</span> <span class="string">js</span></span><br><span class="line"><span class="string">&#123;s1:</span> <span class="string">'字符串\n字符串'</span><span class="string">&#125;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>
+<p>注1：换行的方式</p>
+<ol>
+<li><p>默认换行（类似markdown）</p>
+<blockquote>
+<p>结尾换行不保留，</p>
+<p>其他直观换行均只视为本质上的一个空格。（若连续换行，则视为换行符）</p>
+</blockquote>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&gt;    this: </span></span><br><span class="line"><span class="string">&gt;      Foo</span></span><br><span class="line"><span class="string">&gt;      Bar</span></span><br><span class="line"><span class="string">&gt;    &gt;&gt;&gt; js</span></span><br><span class="line"><span class="string">&gt;    &#123;this: 'Foo Bar'&#125;</span></span><br><span class="line"><span class="string">&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</blockquote>
+<blockquote>
+<ol start="2">
+<li><p>保留换行符 |</p>
+<blockquote>
+<p>结尾换行保留，</p>
+<blockquote>
+<p>其他直观换行均视为本质上的换行。</p>
+</blockquote>
+<p>（常用于插入html片段）</p>
+</blockquote>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&gt;   this: |</span></span><br><span class="line"><span class="string">&gt;     Foo</span></span><br><span class="line"><span class="string">&gt;     Bar</span></span><br><span class="line"><span class="string">&gt;   &gt;&gt;&gt; js</span></span><br><span class="line"><span class="string">&gt;   &#123;this: 'Foo\nBar\n'&#125;</span></span><br><span class="line"><span class="string">&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</blockquote>
+<blockquote>
+<ol start="3">
+<li><p>折叠换行 &gt;</p>
+<blockquote>
+<p>结尾换行保留，</p>
+<p>其他直观换行均只视为本质上的一个空格。（若连续换行，则视为换行符）</p>
+</blockquote>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&gt;    this: &gt;</span></span><br><span class="line"><span class="string">&gt;      Foo</span></span><br><span class="line"><span class="string">&gt;      Bar</span></span><br><span class="line"><span class="string">&gt;    &gt;&gt;&gt; js</span></span><br><span class="line"><span class="string">&gt;    &#123;this: 'Foo Bar\n'&#125;</span></span><br><span class="line"><span class="string">&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</blockquote>
+<blockquote>
+<p>注2：在保留换行和折叠换行基础之上对结尾换行符的处理</p>
+<blockquote>
+<p>结尾换行符修饰符直接添加在保留/折叠换行符之后</p>
+</blockquote>
+<ol>
+<li><p>默认结尾换行符只有一个，无论结尾多少换行</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&gt;    this: |</span></span><br><span class="line"><span class="string">&gt;      Foo</span></span><br><span class="line"><span class="string">&gt;      Bar</span></span><br><span class="line"><span class="string">&gt;      </span></span><br><span class="line"><span class="string">&gt;    &gt;&gt;&gt; js</span></span><br><span class="line"><span class="string">&gt;    &#123;this: 'Foo\nBar\n'&#125;</span></span><br><span class="line"><span class="string">&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</blockquote>
+<blockquote>
+<ol start="2">
+<li><p>保留结尾所有换行符 + ：有多少换行就多少换行符</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&gt;    this: |+</span></span><br><span class="line"><span class="string">&gt;      Foo</span></span><br><span class="line"><span class="string">&gt;      Bar</span></span><br><span class="line"><span class="string">&gt;      </span></span><br><span class="line"><span class="string">&gt;    &gt;&gt;&gt; js</span></span><br><span class="line"><span class="string">&gt;    &#123;this: 'Foo\nBar\n\n'&#125;</span></span><br><span class="line"><span class="string">&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</blockquote>
+<blockquote>
+<ol start="3">
+<li><p>删除结尾所有换行符 - ：无论多少换行都无换行符</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&gt;    this: |-</span></span><br><span class="line"><span class="string">&gt;      Foo</span></span><br><span class="line"><span class="string">&gt;      Bar</span></span><br><span class="line"><span class="string">&gt;      </span></span><br><span class="line"><span class="string">&gt;    &gt;&gt;&gt; js</span></span><br><span class="line"><span class="string">&gt;    &#123;this: 'Foo\nBar'&#125;</span></span><br><span class="line"><span class="string">&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</blockquote>
+</li>
+<li><p>布尔值boolean</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">boolean:</span> </span><br><span class="line"><span class="bullet"> -</span> <span class="literal">true</span></span><br><span class="line"><span class="bullet"> -</span> <span class="literal">false</span></span><br><span class="line"><span class="bullet"> -</span> <span class="literal">True</span></span><br><span class="line"><span class="bullet"> -</span> <span class="literal">False</span></span><br><span class="line"><span class="bullet"> -</span> <span class="literal">TRUE</span></span><br><span class="line"><span class="bullet"> -</span> <span class="literal">FALSE</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>空值null</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">null:</span></span><br><span class="line"><span class="bullet"> -</span> </span><br><span class="line"><span class="bullet"> -</span> <span class="string">~</span></span><br><span class="line"><span class="bullet"> -</span> <span class="literal">null</span></span><br><span class="line"><span class="bullet"> -</span> <span class="literal">Null</span></span><br><span class="line"><span class="bullet"> -</span> <span class="literal">NULL</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>时间</p>
+<blockquote>
+<p>时间采用iso8601格式。</p>
+</blockquote>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">iso8601:</span> <span class="number">2001</span><span class="bullet">-12</span><span class="bullet">-14</span><span class="attr">t21:59:43.10-05:00</span></span><br><span class="line"><span class="string">&gt;&gt;&gt;</span> <span class="string">js</span></span><br><span class="line"><span class="string">&#123;</span> <span class="attr">iso8601:</span> <span class="string">new</span> <span class="string">Date('2001-12-14t21:59:43.10-05:00')</span> <span class="string">&#125;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>日期</p>
+<blockquote>
+<p>日期采用复合 iso8601 格式的年月日格式。</p>
+</blockquote>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">date:</span> <span class="number">1976</span><span class="bullet">-07</span><span class="bullet">-31</span></span><br><span class="line"><span class="string">&gt;&gt;&gt;</span> <span class="string">js</span></span><br><span class="line"><span class="string">&#123;</span> <span class="attr">date:</span> <span class="string">new</span> <span class="string">Date('1976-07-31')</span> <span class="string">&#125;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<blockquote>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th><em>Regular expression</em></th>
+<th><em>Resolved to tag</em></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>**null \</td>
+<td>Null \</td>
+<td>NULL \</td>
+<td>~**</td>
+<td><strong>tag:yaml.org,2002:null</strong></td>
+</tr>
+<tr>
+<td><strong>/* Empty */</strong></td>
+<td><strong>tag:yaml.org,2002:null</strong></td>
+</tr>
+<tr>
+<td>**true \</td>
+<td>True \</td>
+<td>TRUE \</td>
+<td>false \</td>
+<td>False \</td>
+<td>FALSE**</td>
+<td><strong>tag:yaml.org,2002:bool</strong></td>
+</tr>
+<tr>
+<td><strong>[-+]? [0-9]+</strong></td>
+<td><strong>tag:yaml.org,2002:int</strong> <em>(Base 10)</em></td>
+</tr>
+<tr>
+<td><strong>0o [0-7]+</strong></td>
+<td><strong>tag:yaml.org,2002:int</strong> <em>(Base 8)</em></td>
+</tr>
+<tr>
+<td><strong>0x [0-9a-fA-F]+</strong></td>
+<td><strong>tag:yaml.org,2002:int</strong> <em>(Base 16)</em></td>
+</tr>
+<tr>
+<td>**[-+]? ( . [0-9]+ \</td>
+<td>[0-9]+ ( . [0-9]* )? ) ( [eE][-+]? [0-9]+ )?**</td>
+<td><strong>tag:yaml.org,2002:float</strong> <em>(Number)</em></td>
+</tr>
+<tr>
+<td>**[-+]? ( .inf \</td>
+<td>.Inf \</td>
+<td>.INF )**</td>
+<td><strong>tag:yaml.org,2002:float</strong> <em>(Infinity)</em></td>
+</tr>
+<tr>
+<td>**.nan \</td>
+<td>.NaN \</td>
+<td>.NAN**</td>
+<td><strong>tag:yaml.org,2002:float</strong> <em>(Not a number)</em></td>
+</tr>
+<tr>
+<td><strong>*</strong></td>
+<td><strong>tag:yaml.org,2002:str</strong> <em>(Default)</em></td>
+</tr>
+</tbody>
+</table>
+<h3 id="（二）映射mapping"><a href="#（二）映射mapping" class="headerlink" title="（二）映射mapping"></a>（二）映射mapping</h3><p>映射是指键值对的集合，键值之间用一个冒号和空格来隔开’: ‘，</p>
+<p>它类似于js的Object和python的dict。</p>
+<ol>
+<li><p>块映射：块集合表示</p>
+<blockquote>
+<p>块集合是指在范围内缩排等数目空格，建议2个空格。</p>
+<p>一行内容叫一个条目（entry）。</p>
+<p>块集合、映射、序列均叫集合（collections）。</p>
+</blockquote>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">fruit:</span> <span class="string">apple</span></span><br><span class="line"><span class="attr">pet:</span> <span class="string">dog</span></span><br><span class="line"><span class="string">&gt;&gt;&gt;</span> <span class="string">js</span></span><br><span class="line"><span class="string">&#123;fruit:</span> <span class="string">'apple'</span><span class="string">,</span> <span class="attr">pet:</span> <span class="string">'dog'</span><span class="string">&#125;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>流映射：流式表示（flow styles）</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&#123;fruit:</span> <span class="string">apple,</span> <span class="attr">pet:</span> <span class="string">dog&#125;</span></span><br><span class="line"><span class="string">&gt;&gt;&gt;</span> <span class="string">js</span></span><br><span class="line"><span class="string">&#123;fruit:</span> <span class="string">'apple'</span><span class="string">,</span> <span class="attr">pet:</span> <span class="string">'dog'</span><span class="string">&#125;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>复杂映射：以一个问号和空格开头的块集合</p>
+<blockquote>
+<p>当键是一个复杂的键时（如映射或序列），需要使用复杂映射来表示这样的关系。</p>
+<p>复杂映射的键值对可以在块集合内，直接跟在短横线、冒号、问号后。</p>
+</blockquote>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">?</span> <span class="bullet">-</span> <span class="string">hero1</span></span><br><span class="line"><span class="bullet">  -</span> <span class="string">hero2</span></span><br><span class="line"><span class="string">:</span></span><br><span class="line"><span class="bullet">  -</span> <span class="number">2018</span><span class="bullet">-08</span><span class="bullet">-28</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="（三）序列sequence"><a href="#（三）序列sequence" class="headerlink" title="（三）序列sequence"></a>（三）序列sequence</h3><p>序列是指有序的纯量列表，每一个序列的条目开头以一个短横线（dash符）和空格来隔开’- ‘，</p>
+<p>它类似于js的array和python的list。</p>
+<ol>
+<li><p>块序列：块集合表示</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">-</span> <span class="string">fruit</span></span><br><span class="line"><span class="bullet">-</span> <span class="string">pet</span></span><br><span class="line"><span class="string">&gt;&gt;&gt;</span> <span class="string">js</span></span><br><span class="line"><span class="string">['fruit',</span> <span class="string">'pet'</span><span class="string">]</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>流序列：流式表示</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">[fruit,</span> <span class="string">pet]</span></span><br><span class="line"><span class="string">&gt;&gt;&gt;</span> <span class="string">js</span></span><br><span class="line"><span class="string">['fruit',</span> <span class="string">'pet'</span><span class="string">]</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="（四）注释comment"><a href="#（四）注释comment" class="headerlink" title="（四）注释comment"></a>（四）注释comment</h3><p>yaml中只支持行注释，注释以一个井号（octothorpe）开头，也叫做hash、sharp、pound或数字标记’#’。</p>
+<p>注释可以放于任何位置，标示从注释符到行尾都是注释。</p>
+<h3 id="（五）引用"><a href="#（五）引用" class="headerlink" title="（五）引用"></a>（五）引用</h3><p>yaml中的引用指的是定义URI的锚点（anchor），再使用别名（alias）来引用它，这类似于其他语言中的变量定义和调用变量。</p>
+<ol>
+<li><p>纯量引用</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">pet:</span> <span class="meta">&amp;mypet</span> <span class="string">dog</span></span><br><span class="line"><span class="attr">hispet:</span> <span class="meta">*mypet</span></span><br><span class="line"><span class="string">&gt;&gt;&gt;</span> <span class="string">js</span></span><br><span class="line"><span class="string">&#123;pet:</span> <span class="string">'dog'</span><span class="string">,</span> <span class="attr">hispet:</span> <span class="string">'dog'</span><span class="string">&#125;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>集合引用</p>
+<blockquote>
+<p>集合引用在引用锚点时需要引入合并数据符号’&lt;&lt;’。</p>
+<p>合并数据符号能够把引用锚点的数据合并到当前数据。</p>
+<p>（或把别名直接写在’his: ‘后）</p>
+</blockquote>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">own:</span> <span class="meta">&amp;myown</span></span><br><span class="line"><span class="attr">  pet:</span> <span class="string">dog</span></span><br><span class="line"><span class="attr">  fruit:</span> <span class="string">apple</span></span><br><span class="line"><span class="attr">his:</span></span><br><span class="line">  <span class="string">&lt;&lt;:</span> <span class="meta">*myown</span></span><br><span class="line"><span class="string">&gt;&gt;&gt;</span> <span class="string">js</span></span><br><span class="line"><span class="string">&#123;</span> <span class="attr">own:</span> <span class="string">&#123;</span> <span class="attr">pet:</span> <span class="string">'dog'</span><span class="string">,</span> <span class="attr">fruit:</span> <span class="string">'apple'</span> <span class="string">&#125;,</span></span><br><span class="line"><span class="attr">  his:</span> <span class="string">&#123;</span> <span class="attr">pet:</span> <span class="string">'dog'</span><span class="string">,</span> <span class="attr">fruit:</span> <span class="string">'apple'</span> <span class="string">&#125;</span> <span class="string">&#125;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="五、其他概念"><a href="#五、其他概念" class="headerlink" title="五、其他概念"></a>五、其他概念</h2><h3 id="（一）节点nodes"><a href="#（一）节点nodes" class="headerlink" title="（一）节点nodes"></a>（一）节点nodes</h3><h3 id="（二）标签tags"><a href="#（二）标签tags" class="headerlink" title="（二）标签tags"></a>（二）标签tags</h3><h3 id="（三）指令directives"><a href="#（三）指令directives" class="headerlink" title="（三）指令directives"></a>（三）指令directives</h3><p>文档中的单一文件可以使用<strong>指导指令</strong>，使用方法是百分比符号(<strong>%</strong>)。有两个<a href="https://zh.wikipedia.org/wiki/%E7%B7%A8%E8%AD%AF%E7%A8%8B%E5%BC%8F%E5%AE%9A%E5%90%91" target="_blank" rel="noopener">指导指令</a>在YAML1.1版中被定义：</p>
+<ul>
+<li>%YAML 指令，用来识别文件的YAML版本。</li>
+<li>%TAG 指令，被用作URI前缀的缩写。这个方法可能用于在节点类型的标签中。</li>
+</ul>
+<h3 id="（四）保留字符"><a href="#（四）保留字符" class="headerlink" title="（四）保留字符"></a>（四）保留字符</h3><p>两个特殊符号在YAML中被保留，有可能在未来的版本被使用：（ <strong>@</strong> ）和（ <strong>`</strong> ）</p>
+<h2 id="六、其他功能"><a href="#六、其他功能" class="headerlink" title="六、其他功能"></a>六、其他功能</h2><h3 id="（一）js-yaml库"><a href="#（一）js-yaml库" class="headerlink" title="（一）js-yaml库"></a>（一）js-yaml库</h3><p>js-yaml库还能够识别yaml中的函数和正则表达式的字符串。</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># yaml文件名：example.yml</span></span><br><span class="line"><span class="attr">fn:</span> <span class="string">function</span> <span class="string">()</span> <span class="string">&#123;</span> <span class="string">return</span> <span class="number">1</span> <span class="string">&#125;</span></span><br><span class="line"><span class="attr">reg:</span> <span class="string">/test/</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"># js文件：example.yml --&gt; js</span><br><span class="line"><span class="keyword">var</span> yaml = <span class="built_in">require</span>(<span class="string">'js-yaml'</span>);</span><br><span class="line"><span class="keyword">var</span> fs   = <span class="built_in">require</span>(<span class="string">'fs'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">  <span class="keyword">var</span> doc = yaml.load(</span><br><span class="line">    fs.readFileSync(<span class="string">'./example.yml'</span>, <span class="string">'utf8'</span>)</span><br><span class="line">  );</span><br><span class="line">  <span class="built_in">console</span>.log(doc);</span><br><span class="line">&#125; <span class="keyword">catch</span> (e) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(e);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"># js文件：js --&gt; example.yml</span><br><span class="line"><span class="keyword">var</span> yaml = <span class="built_in">require</span>(<span class="string">'js-yaml'</span>);</span><br><span class="line"><span class="keyword">var</span> fs   = <span class="built_in">require</span>(<span class="string">'fs'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">	fn: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123; <span class="keyword">return</span> <span class="number">1</span> &#125;,</span><br><span class="line">    reg: <span class="regexp">/test/</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">  fs.writeFileSync(</span><br><span class="line">    <span class="string">'./example.yml'</span>,</span><br><span class="line">    yaml.dump(obj),</span><br><span class="line">    <span class="string">'utf8'</span></span><br><span class="line">  );</span><br><span class="line">&#125; <span class="keyword">catch</span> (e) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(e);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="七、附录"><a href="#七、附录" class="headerlink" title="七、附录"></a>七、附录</h2><p><img src="http://yaml.org/spec/1.2/serialize2.png" alt=""></p>
+
+      
     </div>
-</div> 
-    <script>
-    var siteMeta = {
-        root: "/",
-        author: "Mooy Xu"
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cmn">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/08/计算机时间以及NTP_done/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Mooy Xu">
+      <meta itemprop="description" content="code">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mooy">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/08/08/计算机时间以及NTP_done/" class="post-title-link" itemprop="url">NTP</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2018-08-08 10:15:34" itemprop="dateCreated datePublished" datetime="2018-08-08T10:15:34+08:00">2018-08-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2018-08-15 16:53:05" itemprop="dateModified" datetime="2018-08-15T16:53:05+08:00">2018-08-15</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="同步计算机时间的协议-——-NTP"><a href="#同步计算机时间的协议-——-NTP" class="headerlink" title="同步计算机时间的协议 —— NTP"></a>同步计算机时间的协议 —— NTP</h1><p>[TOC]</p>
+<h2 id="一、背景"><a href="#一、背景" class="headerlink" title="一、背景"></a>一、背景</h2><h3 id="早前时间的标准是什么？"><a href="#早前时间的标准是什么？" class="headerlink" title="早前时间的标准是什么？"></a>早前时间的标准是什么？</h3><p>​    地球自转的客观规律：</p>
+<ul>
+<li><p>恒星日：地球自转一圈，即转360度，称为一个恒星日，需要23小时56分4.09894秒。</p>
+<blockquote>
+<p>要想测量地球自转了360度，需要有一个参照物（测量同一经线两次正对该参照物的时间差）。在宇宙中，其他物体也都是在运动的，而越近的物体相对地球运动的角度就会更大，造成的误差就更大，所以选择以很遥远的恒星作为参照物，这样可以减少误差甚至忽略不计。</p>
+<p>这也是把自转360度称为一个恒星日的由来。</p>
+</blockquote>
+</li>
+<li><p>真太阳日：如果始终以太阳为参照物，由于地球自转时还在公转，因此同一经线从第一次到第二次正对太阳，地球总共自转了360度加约0.59度，即转了一圈多，称为一个真太阳日，需要约24小时。</p>
+</li>
+<li><p>平太阳日：由于地球绕日轨道并非正圆，所以一个真太阳日的长度在不断变化。取平均数可得同一经线从第一次到第二次正对太阳，地球总共自转了近似360.59度，称为一个平太阳日，需要24小时。</p>
+</li>
+</ul>
+<p>​        我们日常生活所需要的是对昼夜更替规律的量化，因此我们所定的“天”是选择以平太阳日（地球转360.59度）为基准的，即把一个平太阳日称为一天，一天又人为地分成24个小时。</p>
+<blockquote>
+<p>一个平太阳日被定为24小时从而推导出一个恒星日要23小时56分4.09894秒。</p>
+<p>也由此产生了旧的秒的定义。</p>
+</blockquote>
+<p>​    这24小时如何对昼夜的更替程度进行映射呢？</p>
+<p>​    整个地球根据不同的经线被划分成了24等份，即24个时区。其中格林威治所处的时区的时间称为格林威治时间。我们人为地把太阳在格林威治经线（0度经线）正头顶时的时间定为格林威治时间的平太阳日的计算起点（后以平子夜作为平太阳日起点）。其他的时区则根据距离格林威治时区的远近相应地增加/减少时间。</p>
+<blockquote>
+<p>​    这样以格林威治时区往东边加时间、往西边减时间，就会造成格林威治时区的正对面的时间刚好在两天的交界线（即一边加12小时一边减12小时，刚好相差一天），因此我们把格林威治时区的正对面称为换日线，经过换日线自行增加/减少一天。</p>
+</blockquote>
+<p>​    这也就是我们最初所定的<strong>格林威治时间</strong>，它是以地球自转为基础的时间计量系统。</p>
+<blockquote>
+<p>GMT：Greenwich Mean Time，即格林威治时间，或格林威治标准时间。</p>
+<p>UT：Universal Time，即世界时。它是格林威治时间是别名关系。</p>
+</blockquote>
+<p>​    可见格林威治时间虽然是以客观规律为基础的时间计量系统，但是它并不是一个均匀的时间度量。因此，我们开始选用即能保证遵循客观规律，又能保持时间均匀推进的时间计量系统。</p>
+<h3 id="现在时间的标准是什么？"><a href="#现在时间的标准是什么？" class="headerlink" title="现在时间的标准是什么？"></a>现在时间的标准是什么？</h3><p>​    客观规律：原子的原子核外的不同电子层之间有着能量差。当电子从高能量态跃迁到低能量态时，会释放不连续的电磁波。对于一个原子来说，这个电磁波的频率是固定的，该频率也是共振频率。</p>
+<p>​    我们把晶体振荡器等震荡仪器的震荡频率调到与该原子的共振频率相近，原子会吸收震荡仪器中与它的共振频率相等的那部分波。由于吸收了能量，原子便会释放出电磁波，所释放的电磁波频率再用来调整震荡仪器的频率。用该震荡仪器的频率再除以该原子的震荡频率，就可以得到现实中一秒的一个脉冲（犹如原子节拍器）。</p>
+<p>​    可见，使用原子的共振频率来定义秒，能得到一个平滑均匀连续且精度极高的时间。</p>
+<blockquote>
+<p>当前使用的原子主要是铯、氢、铷，其中主要用铯来规范时间。</p>
+<p>目前秒的新定义就是使用铯的共振频率来定义的：铯 -133 原子基态的两个超精细能级间在零磁场下跃迁辐射9,192,631,770周所持续的时间。</p>
+</blockquote>
+<p>​    我们目前通过比较、综合世界各地铯原子钟数据，来确定国际原子时间，并以之作为目前的标准时间，称为<strong>世界协调时</strong>。它是以原子时秒长为基础，在时刻上尽量接近于世界时的一种时间计量系统。</p>
+<blockquote>
+<p>UTC：Coordinated Universal  Time（还有个法文名，简称是综合俩名的缩写），即世界协调时，或世界统一时间、世界标准时间、国际协调时间。</p>
+</blockquote>
+<p>​    又由于地球自转速度的不均匀和公转曲线的不均匀，所以世界协调时与格林威治时间之间是有误差的。我们以格林威治时间为基准，使用均匀且接近于它值的世界协调时作为日常使用时间。再在特定时间对世界协调时做修正（加上正负闰秒），使得它对格林威治时间的误差在0.9秒之内。</p>
+<p>​    <strong>目前互联网中使用的标准时间就是世界协调时，即UTC。而我国处于+8时区，所以时间要在UTC上+8，即UTC+8。</strong></p>
+<blockquote>
+<p>CST：China Standard Time UT+8:00，中国标准时间；</p>
+<p>​    或Central Standard Time (USA) UT-6:00，美国中部时间；</p>
+<p>​    或Central Standard Time (Australia) UT+9:30，澳大利亚中部时间；</p>
+<p>​    或Cuba Standard Time UT-4:00，古巴标准时间。</p>
+</blockquote>
+<h3 id="计算机中是如何计时的？"><a href="#计算机中是如何计时的？" class="headerlink" title="计算机中是如何计时的？"></a>计算机中是如何计时的？</h3><blockquote>
+<p>此处主讲linux</p>
+</blockquote>
+<p>​    计算机中分为硬件时钟和系统时钟：</p>
+<ol>
+<li><p>硬件时钟：Hardware Clock；或Real Time Clock，简称RTC。在BIOS内部就也有一颗原子钟在计时。</p>
+<p> ​    该计时方式精度能达到微秒级别。</p>
+</li>
+<li><p>系统时钟：System Clock，也叫软件时间；或OS Clock，操作系统时间。它是指linux内核中的时钟。</p>
+<p> ​    linux内核中的时钟会直接利用CPU的周期，利用计算循环的方法来计时。CPU的时钟周期是恒定的，执行一条执行所需要的时钟周期也是恒定的。若假设一条语句要10个时钟周期，那么循环10^3次语句就是10^4次时钟周期；若假设一个时钟周期是1微秒，那么一次循环就是0.01秒。</p>
+<p> ​    而由于多任务系统下由于系统调度的原因，程序会不停中断继续，所以无法精确地知道循环固定次数用了多少时钟周期，所以在多任务系统下误差会较大。</p>
+<p> ​    该计时方式精度一般在毫秒级别。</p>
+<blockquote>
+<p>系统时钟所存储的时间非直接的时间，而是存储自1970/01/01 00:00:00.00至今的秒数。</p>
+</blockquote>
+</li>
+</ol>
+<p>​    由于计时元件（crystal）的不同和所处环境的不同，不同的计算机计时会有微小的误差。久而久之，这样的误差就可能达到数分钟。因此，我们需要一个方式，统一各台我们所需要统一的计算机的时间。</p>
+<h2 id="二、简介"><a href="#二、简介" class="headerlink" title="二、简介"></a>二、简介</h2><p>​    NTP：Network Time Protocol，即网络时间协议，是用来同步网络中计算机时间的一种协议。它可以使得计算机定时去向所配置的服务器更新时间，局域网中精度可达0.1ms，互联网中可达1-50ms。</p>
+<p>​    NTP使用的传输层协议是UDP，使用的UDP端口号是123。</p>
+<h2 id="三、基本原理"><a href="#三、基本原理" class="headerlink" title="三、基本原理"></a>三、基本原理</h2><blockquote>
+<p>层0:            [钟]</p>
+<p>​            ↓    </p>
+<p>层1:        [服务器]</p>
+<p>​            ↓</p>
+<p>层2:        [C/S端点] ←→ [C/S端点]</p>
+<p>​            ↓</p>
+<p>层3:        [C/S端点] ←→ [C/S端点]</p>
+</blockquote>
+<p>​    NTP模型中有很多的主机，每个主机都用一个ntpd表示，并且每一个主机都处于一个层级；最小层1，最高层15，层16不同步。</p>
+<blockquote>
+<p>ntpd：ntp daemon，即ntp守护进程。</p>
+<p>stratum：层级。</p>
+</blockquote>
+<p>​    其中，最顶层（层1）是一台暴露时间的服务器，该服务器一般直接与层0的物理钟（原子钟、GPS钟等）相连，也可直接设置为本机时间。</p>
+<p>​    而后每层的计算机都既是客户端也是服务器，它对上一层来说是客户端，对下一层来说是服务器。</p>
+<p>​    这些计算机之间会每隔一段时间请求一次同步。低一层的会向上一层的请求，同一层的也会相互之间请求；最小间隔64秒，最大间隔1024秒。<strong>但当误差大于1000s时，不再同步。因为这是非正常误差，可能是由人为调整或者硬件故障所造成的，所以此时NTP服务会退出，需要人工使用ntpdate来同步。</strong>（-g选项可以忽略该非正常误差，但ntpd还是会因此终止）</p>
+<p>​    当同步时间时，设备之间会发送报文以及时间戳，最终以往返时间减去延迟获得NTP时间。</p>
+<h2 id="四、同步模式"><a href="#四、同步模式" class="headerlink" title="四、同步模式"></a>四、同步模式</h2><h3 id="（一）C-S模式"><a href="#（一）C-S模式" class="headerlink" title="（一）C/S模式"></a>（一）C/S模式</h3><ol>
+<li><p>过程：客户端上需要手工指定NTP服务器的地址。客户端向NTP服务器发送NTP时间同步报文。NTP服务器收到报文后会自动工作在服务器模式，并回复应答报文。   </p>
+<p>​    如果客户端可以从多个时间服务器获取时间同步，则客户端收到应答报文后，进行时钟过滤和选择，并与优选的时钟进行时间同步。</p>
+</li>
+<li><p>方向：客户端能够与NTP服务器的时间同步，NTP服务器无法与客户端的时间同步。</p>
+</li>
+<li><p>场合：该模式通常用于下级的设备从上级的时间服务器获取时间同步。</p>
+</li>
+</ol>
+<h3 id="（二）对等体模式"><a href="#（二）对等体模式" class="headerlink" title="（二）对等体模式"></a>（二）对等体模式</h3><ol>
+<li><p>过程：主动对等体（Symmetricactivepeer）上需要手工指定被动对等体（Symmetricpassivepeer）的地址。主动对等体向被动对等体发送NTP时间同步报文。被动对等体收到报文后会自动工作在被动对等体模式，并回复应答报文。  </p>
+<p>​    如果主动对等体可以从多个时间服务器获取时间同步，则主动对等体收到应答报文后，进行时钟过滤和选择，并与优选的时钟进行时间同步。</p>
+</li>
+<li><p>方向：主动对等体和被动对等体的时间可以互相同步，如果双方的时钟都处于同步状态，则层数大的时钟与层数小的时钟的时间同步。</p>
+</li>
+<li><p>场合：该模式通常用于同级的设备间互相同步，以便在同级的设备间形成备份。如果某台设备与所有上级时间服务器的通信出现故障，则该设备仍然可以从同级的时间服务器获得时间同步</p>
+</li>
+</ol>
+<h3 id="（三）广播模式"><a href="#（三）广播模式" class="headerlink" title="（三）广播模式"></a>（三）广播模式</h3><ol>
+<li><p>过程：广播服务器周期性地向广播地址255.255.255.255发送NTP时间同步报文。广播客户端侦听来自广播服务器的广播报文，根据接收的广播报文将设备的时间与广播服务器的时间进行同步。   </p>
+<p>​    广播客户端接收到广播服务器发送的第一个NTP报文后，会与广播服务器进行报文交互，以获得报文的往返时延，为时间同步提供必要的参数。之后，只有广播服务器单方向发送报文。</p>
+</li>
+<li><p>方向：广播客户端能够与广播服务器的时间同步，广播服务器无法与广播客户端的时间同步。</p>
+</li>
+<li><p>场合：广播服务器广播发送时间同步报文，可以同时同步同一个子网中多个广播客户端的时间。</p>
+<p>​    使用同一个时间服务器为同一个子网中的大量设备提供时间同步时，可以使用广播模式，以简化网络配置由于只有广播服务器单方向发送报文，广播模式的时间准确度不如客户端/服务器模式和对等体模式。</p>
+</li>
+</ol>
+<h3 id="（四）组播模式"><a href="#（四）组播模式" class="headerlink" title="（四）组播模式"></a>（四）组播模式</h3><ol>
+<li>过程：组播服务器周期性地向指定的组播地址发送NTP时间同步报文。客户端侦听来自服务器的组播报文，根据接收的组播报文将设备的时间与组播服务器的时间进行同步。</li>
+<li>方向：组播客户端能够与组播服务器的时间同步，组播服务器无法与组播客户端的时间同步。</li>
+<li>场合：组播模式对广播模式进行了扩展，组播服务器可以同时为同一子网、不同子网的多个组播客户端提供时间同步组播模式的时间准确度不如客户端/服务器模式和对等体模式。</li>
+</ol>
+<h2 id="五、安装"><a href="#五、安装" class="headerlink" title="五、安装"></a>五、安装</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> ubuntu / Debian</span></span><br><span class="line">sudo apt install ntp ntpstat -y</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> centos / RHEL</span></span><br><span class="line">sudo yum install ntp ntpdate ntp-doc -y</span><br></pre></td></tr></table></figure>
+<h2 id="六、配置"><a href="#六、配置" class="headerlink" title="六、配置"></a>六、配置</h2><h3 id="Linux时区设置"><a href="#Linux时区设置" class="headerlink" title="Linux时区设置"></a>Linux时区设置</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 查看时区</span></span><br><span class="line">ls -l /etc/localtime</span><br><span class="line">或</span><br><span class="line">timedatectl</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 设置时区</span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment"># 方法一</span></span></span><br><span class="line">tzselect</span><br><span class="line">// 这可以根据选择获取到[时区命令]</span><br><span class="line">// 根据提示将[时区命令]存入.profile文件，再重新登陆</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment"># 方法二</span></span></span><br><span class="line">// 删除原时区</span><br><span class="line">sudo rm -f /etc/localtime</span><br><span class="line">// 链接新时区</span><br><span class="line">sudo ln -s /usr/share/zoneinfo/Asia/Shanghai /etc/localtime</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment"># 方法三</span></span></span><br><span class="line">sudo timedatectl set-timezone 'Asia/Shanghai'</span><br></pre></td></tr></table></figure>
+<h3 id="linux时间设置"><a href="#linux时间设置" class="headerlink" title="linux时间设置"></a>linux时间设置</h3><ol>
+<li><p>系统时间</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 查看系统时间</span></span><br><span class="line">data</span><br><span class="line">或</span><br><span class="line">timedatectl</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 设置系统时间（以固定字符串格式）</span></span><br><span class="line">data -s [your_time]</span><br><span class="line">data [MMDDhhmm[[CC]YY][.ss]]</span><br><span class="line">// MMDDhhmmCCYY.ss -&gt; 月 日 时 分 世纪 年 . 秒</span><br><span class="line">示例：</span><br><span class="line">data -s 08/15/18</span><br><span class="line">data -s 08:08:08</span><br><span class="line">data 0815080818.08</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>硬件时间</p>
+<blockquote>
+<p>系统开机以硬件时间为基准来开机</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 查看硬件时间</span></span><br><span class="line">hwclock</span><br><span class="line">或</span><br><span class="line">timedatectl</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 设置硬件时间（月/日/年 时:分:秒）</span></span><br><span class="line">hwclock --set --data=[your_time_str]</span><br><span class="line">示例：</span><br><span class="line">hwclock --set --date="06/18/14 14:55"</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>同步系统/硬件时间</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 以系统时间同步硬件时间</span></span><br><span class="line">hwclock --systohc [| -w]</span><br><span class="line">// w -&gt; write</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 以硬件时间同步系统时间</span></span><br><span class="line">hwclock --hctosys</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="ntp配置"><a href="#ntp配置" class="headerlink" title="ntp配置"></a>ntp配置</h3><ol>
+<li><p>配置文件路径</p>
+<p> NTP主配置文件位于<strong>/etc/ntp.conf</strong>。</p>
+</li>
+<li><p>权限管理</p>
+<p>NTP配置文件中使用<strong>restrict</strong>指令管理权限；通常的思路是先限制所有权限，再按需放行。</p>
+<p>restrict指令格式为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 统一格式</span><br><span class="line">restrict [your_ip or your_hostname] mask [netmask_IP] [parameter]</span><br><span class="line"></span><br><span class="line"># 示例</span><br><span class="line">restrict 192.168.44.130 mask 255.255.255.0 nomodify notrap</span><br></pre></td></tr></table></figure>
+<p>其中parameter主要有下列：</p>
+<ul>
+<li><p>ignore：拒绝所有类型的NTP联机。</p>
+</li>
+<li><p>nomodify：客户端不能使用ntpc与ntpq这两个程序来修改服务器的时间参数，但客户端仍可透过这部主机来进行网络校时的。</p>
+</li>
+<li><p>noquery：客户端不能够使用ntpq, ntpc等指令来查询时间服务器，等于不提供NTP的网络校时。</p>
+</li>
+<li><p>notrap：不提供trap这个远程事件登录(remote event logging)的功能。</p>
+</li>
+<li><p>notrust：拒绝没有认证的客户端。</p>
+</li>
+</ul>
+<blockquote>
+<p>不加任何参数即该IP/网段无任何限制</p>
+</blockquote>
+</li>
+<li><p>上层服务器设定</p>
+<p> NTP配置文件中是用<strong>server</strong>指令来设置上层服务器，即向哪台服务器请求校时。</p>
+<p> server指令格式为：</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 统一格式</span><br><span class="line">server [your_IP or your_hostname] [prefer]</span><br></pre></td></tr></table></figure>
+<p> 其中prefer参数表示是否优先选择。</p>
+</li>
+<li><p>时钟偏移记录</p>
+<p> 系统时钟与硬件时钟之间会存在时间上的差异，NTP配置文件中使用<strong>driftfile</strong>指令来设置记录这些差异的文件的存放位置。ntpd会每小时更新一次它。</p>
+<p> driftfile指令格式为：</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">driftfile [可以被ntpd写入的具体文件路径]</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>注意该参数需要是具体文件路径并且ntpd对它要有读写权限。</p>
+<p>文件内的时间单位是10^(-6)秒。</p>
+</blockquote>
+</li>
+<li><p>密钥系统</p>
+<p> 密钥系统也可以管理权限，NTP配置文件中使用<strong>key</strong>指令来设置。它不常用。</p>
+</li>
+</ol>
+<h3 id="ntp配置实例"><a href="#ntp配置实例" class="headerlink" title="ntp配置实例"></a>ntp配置实例</h3><blockquote>
+<p>假设ntp服务器是台湾的tock/tick/time。</p>
+<p>假设有局域网ntp请求。</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 打开文件</span></span><br><span class="line">sudo vi /etc/ntp.conf</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 1. 先处理权限方面的问题，包括放行上层服务器以及开放局域网用户来源：</span></span><br><span class="line">restrict default kod nomodify notrap nopeer noquery     &lt;==拒绝 IPv4 的用户</span><br><span class="line">restrict -6 default kod nomodify notrap nopeer noquery  &lt;==拒绝 IPv6 的用户</span><br><span class="line">restrict 220.130.158.71   &lt;==放行 tock.stdtime.gov.tw 进入本 NTP 的服务器</span><br><span class="line">restrict 59.124.196.83    &lt;==放行 tick.stdtime.gov.tw 进入本 NTP 的服务器</span><br><span class="line">restrict 59.124.196.84    &lt;==放行 time.stdtime.gov.tw 进入本 NTP 的服务器</span><br><span class="line">restrict 127.0.0.1        &lt;==底下两个是默认值，放行本机来源</span><br><span class="line">restrict -6 ::1</span><br><span class="line">restrict 192.168.100.0 mask 255.255.255.0 nomodify &lt;==放行局域网用户来源，或者列出单独IP</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 2. 设定主机来源，请先将原本的 [0|1|2].centos.pool.ntp.org 的设定批注掉：</span></span><br><span class="line">server 220.130.158.71 prefer  &lt;==以这部主机为最优先的server</span><br><span class="line">server 59.124.196.83</span><br><span class="line">server 59.124.196.84</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 3.默认的一个内部时钟数据，用在没有外部 NTP 服务器时，使用它为局域网用户提供服务：</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> server    127.127.1.0     <span class="comment"># local clock</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> fudge     127.127.1.0 stratum 10</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 4.预设时间差异分析档案与暂不用到的 keys 等，不需要更动它：</span></span><br><span class="line">driftfile /var/lib/ntp/drift</span><br><span class="line">keys      /etc/ntp/keys</span><br></pre></td></tr></table></figure>
+<h2 id="七、运行和维护"><a href="#七、运行和维护" class="headerlink" title="七、运行和维护"></a>七、运行和维护</h2><h3 id="启动ntpd"><a href="#启动ntpd" class="headerlink" title="启动ntpd"></a>启动ntpd</h3><blockquote>
+<p>注意要开放123端口，能ping通上层服务器，且与上层服务器的时间差不可超过最大误差。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;</span><span class="bash"> <span class="comment"># 如iptables防火墙修改开通局域网的123端口</span></span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> vim /usr/<span class="built_in">local</span>/virus/iptables/iptables.allow</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> // 加入下面内容</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> iptables -A INPUT -i <span class="variable">$EXTIF</span> -p udp -s 192.168.100.0/24 --dport 123 -j ACCEPT</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> // 启动</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> /usr/<span class="built_in">local</span>/virus/iptables/iptables.rule</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"></span></span><br></pre></td></tr></table></figure>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> ubuntu</span></span><br><span class="line">/etc/init.d/ntp start</span><br><span class="line">或</span><br><span class="line">systemctl start ntp</span><br><span class="line">或</span><br><span class="line">service ntp start</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> centos</span></span><br><span class="line">systemctl start ntpd</span><br><span class="line">或</span><br><span class="line">chkconfig ntpd on</span><br></pre></td></tr></table></figure>
+<h3 id="检查ntp状态"><a href="#检查ntp状态" class="headerlink" title="检查ntp状态"></a>检查ntp状态</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 方法一</span></span><br><span class="line">ntpstat</span><br><span class="line">//检查</span><br><span class="line"></span><br><span class="line">service --status-all | grep ntp</span><br><span class="line">// 加号表示已启动</span><br><span class="line"></span><br><span class="line">netstat -tlunp | grep ntp</span><br><span class="line">// UDP协议，123端口</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 方法二</span></span><br><span class="line">ntpq -p</span><br></pre></td></tr></table></figure>
+<p>其中ntpq的执行结果每列含义如下：</p>
+<ul>
+<li>remote：远程连接的NTP主机的IP或者主机名称。<ul>
+<li>开头如果是『 * 』，代表该上层NTP服务器已连上线，并正在作用当中；</li>
+<li>开头如果是『 + 』，代表该上层NTP服务器也已连上线，但尚为作用，可作为下一个提供时间更新的候选者。</li>
+</ul>
+</li>
+<li>refid：所参考的上层NTP服务器地址；</li>
+<li>st：stratum，即NTP层数；</li>
+<li>when：最近的一次NTP时间更新动作是在几秒钟之前；</li>
+<li>poll：下一次NTP时间更新动作在几秒钟之后；</li>
+<li>reach：已向上层NTP服务器请求了多少次时间更新；</li>
+<li>delay：时间更新时的网络延迟，单位10^(-3) 秒；</li>
+<li>offset：时间补偿的结果，单位10^(-3) 秒；</li>
+<li>jitter：系统时间和硬件时间的差值，单位 10^(-3) 秒。</li>
+</ul>
+<h3 id="立即更新时间"><a href="#立即更新时间" class="headerlink" title="立即更新时间"></a>立即更新时间</h3><p>NTP用户端想要立即更新时间，可以使用<strong>ntpdate</strong>命令，但是默认它不能与ntpd同时使用。</p>
+<blockquote>
+<p>当用户端与服务端时间的误差较大时，会无法启用ntpd进行更新，此时建议先使用ntpdate来更新一次。</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 命令格式</span></span><br><span class="line">ntpdate [-dv] [NTP_IP/NTP_hostname]</span><br><span class="line">// 参数d：debug，进入调试模式，可以展示出更多有效信息。</span><br><span class="line">// 参数v：显示更多信息。</span><br><span class="line"></span><br><span class="line">示例：</span><br><span class="line">ntpdate 192.168.100.254</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>通过ntpdate也可以实现定时更新时间。</p>
+<p>但该方式仅适合不启动ntpd的情况，当客户端较多时，建议启用ntpd。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;</span><span class="bash"> vi /etc/crontab</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> // 加入下面内容，使得每天5点10分自动执行ntpdate tock.stdtime.gov.tw去更新时间，并且展示时间</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> 10 5 * * * root (/usr/sbin/ntpdate tock.stdtime.gov.tw &amp;&amp; /sbin/hwclock -w) &amp;&gt; /dev/null</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"></span></span><br></pre></td></tr></table></figure>
+</blockquote>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cmn">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/01/Javascript_test/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Mooy Xu">
+      <meta itemprop="description" content="code">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mooy">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/08/01/Javascript_test/" class="post-title-link" itemprop="url">test for javascript</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2018-08-01 15:28:00" itemprop="dateCreated datePublished" datetime="2018-08-01T15:28:00+08:00">2018-08-01</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="test"><a href="#test" class="headerlink" title="test"></a>test</h1>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cmn">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/31/Hexo_done/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Mooy Xu">
+      <meta itemprop="description" content="code">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mooy">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/07/31/Hexo_done/" class="post-title-link" itemprop="url">Hexo总结</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2018-07-31 09:52:29" itemprop="dateCreated datePublished" datetime="2018-07-31T09:52:29+08:00">2018-07-31</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2018-08-01 13:44:31" itemprop="dateModified" datetime="2018-08-01T13:44:31+08:00">2018-08-01</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Hexo"><a href="#Hexo" class="headerlink" title="Hexo"></a>Hexo</h1><blockquote>
+<p>简介：hexo是个博客系统，它的数据可以存储在本地，也支持推送到远程服务器，并且方便迁移且使用通用的Markdown来写作。</p>
+</blockquote>
+<blockquote>
+<p>官网：<a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a></p>
+<p>官方文档：<a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a></p>
+<p>Issues：<a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a></p>
+<p>Github：<a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a></p>
+</blockquote>
+<h3 id="一、搭建"><a href="#一、搭建" class="headerlink" title="一、搭建"></a>一、搭建</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 1.install [Git]</span></span><br><span class="line">Mac: brew install git</span><br><span class="line">Ubuntu: sudo apt-get install git</span><br><span class="line">CentOS: sudo yum install git</span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> git --version</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 2.install [Node.js]</span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment"># 方法一</span></span></span><br><span class="line">curl https://raw.github.com/creationix/nvm/master/install.sh | sh</span><br><span class="line">wget -qO- https://raw.github.com/creationix/nvm/master/install.sh | sh</span><br><span class="line">nvm install stable</span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment"># 方法二</span></span></span><br><span class="line">下载: https://nodejs.org/</span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> node -v [| --version]</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 3.install [Hexo]</span></span><br><span class="line">npm install -g hexo-cli</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 4.set up [Hexo file]</span></span><br><span class="line">mkdir &lt;folder&gt;</span><br><span class="line">cd &lt;folder&gt;</span><br><span class="line">hexo init</span><br><span class="line">npm install</span><br></pre></td></tr></table></figure>
+<h3 id="二、配置"><a href="#二、配置" class="headerlink" title="二、配置"></a>二、配置</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 1.整体配置：（config）</span></span><br><span class="line">整体配置包括主题、部署url等。</span><br><span class="line">它分为hexo的配置和theme的配置，theme的配置是否会重写或继承hexo配置依据具体的theme以及它的配置而定。</span><br><span class="line">请参照hexo/theme文档。</span><br><span class="line">1. hexo - config: &#123;PATH&#125;/_config.yml</span><br><span class="line">2. theme - config: &#123;PATH&#125;/themes/&#123;THEME&#125;/_config.yml</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 2.模版配置：（layout）</span></span><br><span class="line">模版配置是用来给写作提供模版的，新建的文章可以选择根据模版而建立。</span><br><span class="line">模版配置主要为hexo的模版配置，theme中也可能会有模版配置。</span><br><span class="line">模版中所能使用的变量请参照hexo官方文档。</span><br><span class="line">1. hexo - layout: &#123;PATH&#125;/scaffolds/</span><br><span class="line"><span class="meta">	&gt;</span><span class="bash"> 默认三个模版：post/page/draft，其中post为默认</span></span><br><span class="line">2. theme - layout: &#123;PATH&#125;/themes/&#123;THEME&#125;/layout/</span><br></pre></td></tr></table></figure>
+<h3 id="三、写作"><a href="#三、写作" class="headerlink" title="三、写作"></a>三、写作</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">写作的本质是写成markdown文件，供hexo解析。</span><br><span class="line">md文件位于source之下，不同的文章类型可选放在不同的子文件夹下。</span><br><span class="line">md中有一系列的hexo变量可以使用，尤其是tags和categories，具体参照官方文档。</span><br><span class="line"><span class="meta">#</span><span class="bash"> 1.不同的新建方式</span></span><br><span class="line">1. 命令行式：hexo new [layout] &lt;title&gt;</span><br><span class="line"><span class="meta">	&gt;</span><span class="bash"> 根据不同的layout生成不同类别的md放置于不同的子文件夹下。</span></span><br><span class="line">2. 直接编写式：直接下子文件夹下编写md文件，但是这样创作的md要自己注意存放位置。</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 2.不同的子文件夹</span></span><br><span class="line">1. _post：(layout的默认选项)当layout为post时，新的md会存储于此。</span><br><span class="line"><span class="meta">	&gt;</span><span class="bash"> 此处文章会被直接解析展示。</span></span><br><span class="line">2. &#123;PAGE&#125;：当layout为page时，source下会新建&#123;PAGE&#125;目录，并在该目录下新建index.md。</span><br><span class="line"><span class="meta">	&gt;</span><span class="bash"> 此处文章不会被直接解析展示，但是会对应二级路由&#123;URL&#125;/&#123;PAGE&#125;。</span></span><br><span class="line">3. _draft：当layout为draft时，新的md会存储于此。</span><br><span class="line"><span class="meta">	&gt;</span><span class="bash"> 此处文章不会被直接解析展示。</span></span><br><span class="line"><span class="meta">	&gt;</span><span class="bash"> 它是草稿箱，当要展示时，使用命令：hexo publish [layout] &lt;title&gt;</span></span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
+<h3 id="四、运行-部署"><a href="#四、运行-部署" class="headerlink" title="四、运行/部署"></a>四、运行/部署</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 1.本地启动服务器（测试/直接本地作服务器）</span></span><br><span class="line">hexo server [| s] </span><br><span class="line"><span class="meta">			&gt;</span><span class="bash"> 可选短参数</span></span><br><span class="line">		[-i &#123;IP&#125;] [-p &#123;PORT&#125;]</span><br><span class="line"><span class="meta">			&gt;</span><span class="bash"> 可选配置ip和端口</span></span><br><span class="line">		[-s (static)]</span><br><span class="line"><span class="meta">			&gt;</span><span class="bash"> 可选静态模式，只识别public（由generate生成）</span></span><br><span class="line"><span class="meta">	&gt;</span><span class="bash"> 可选Pow服务器</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 2.生成静态文件 &gt; &#123;PATH&#125;/public</span></span><br><span class="line">hexo generate [| g]</span><br><span class="line"><span class="meta">			&gt;</span><span class="bash"> 可选短参数</span></span><br><span class="line">		[--watch]</span><br><span class="line"><span class="meta">			&gt;</span><span class="bash"> 可选检测文件变动自动执行</span></span><br><span class="line">		[--deploy | -d]</span><br><span class="line"><span class="meta">			&gt;</span><span class="bash"> 可选生成后自动部署到远程服务器，并可选短参数-d</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 3.部署到远程服务器（不同的远端参照文档配置）</span></span><br><span class="line">hexo deploy [| d]</span><br><span class="line">		[--generate | -g]</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> 注：generate与deploy可以合写为：</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> hexo generate --deploy 或</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> hexo deploy --generate</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> 再简写为</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> hexo g -d 或</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> hexo d -g</span></span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
+<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cmn">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/05/Markdown_done/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Mooy Xu">
+      <meta itemprop="description" content="code">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mooy">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/07/05/Markdown_done/" class="post-title-link" itemprop="url">Markdown总结</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2018-07-05 15:01:17" itemprop="dateCreated datePublished" datetime="2018-07-05T15:01:17+08:00">2018-07-05</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2018-08-01 15:24:46" itemprop="dateModified" datetime="2018-08-01T15:24:46+08:00">2018-08-01</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Language/" itemprop="url" rel="index"><span itemprop="name">Language</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Language/Markdown/" itemprop="url" rel="index"><span itemprop="name">Markdown</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Markdown"><a href="#Markdown" class="headerlink" title="Markdown"></a>Markdown</h1><blockquote>
+<p><strong>简介</strong>：markdown是一门轻量级的语言，用来记录文本信息：文章、笔记等。它比单纯的txt文本拥有更多的内容格式，却不像html/xml那样有复杂且不直观的语法。现在它已经被广泛使用，且能对其他的复杂格式转化：html、pdf等。</p>
+</blockquote>
+<blockquote>
+<p><strong>语法简介</strong>：markdown分为区块元素和区段元素，对应html中的块级元素(block)和行级元素(inline)。</p>
+<ol>
+<li>区块元素有段落、标题、区块引用、列表、代码区块、分隔线。</li>
+<li>区段元素有链接、强调、代码、图片。</li>
+<li>其他还有反斜杠、自动链接等。</li>
+</ol>
+<p>下面用以<em>字符串</em>和<em>正则表达式</em>组成的伪代码，配合示例，来展示。</p>
+</blockquote>
+<p>[TOC]</p>
+<h2 id="一、结构"><a href="#一、结构" class="headerlink" title="一、结构"></a>一、结构</h2><h3 id="（一）段落和换行"><a href="#（一）段落和换行" class="headerlink" title="（一）段落和换行"></a>（一）段落和换行</h3><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">`段落的概念是，一个markdown段落由一个或者多个连续的文本行组成，前后要有至少一个无文字行。因此普通段落不应该用空格或者制表符来缩进。它对应&lt;p&gt;。</span><br><span class="line">`换行的概念是，换到下面的一行，换行不一定产生新的段落。它对应&lt;br&gt;。</span><br><span class="line"></span><br><span class="line"><span class="section"># 方法一：</span></span><br><span class="line">空格&#123;0,3&#125; + 段落一 + 空格&#123;2,&#125;/制表符&#123;1,&#125;</span><br><span class="line">段落二</span><br><span class="line"></span><br><span class="line"><span class="section"># 方法二：</span></span><br><span class="line">空格&#123;0,3&#125; + 段落一 + '&lt;br&gt;' 或 '&lt;br /&gt;' 或 '&lt;/br&gt;'</span><br><span class="line">段落二</span><br><span class="line"></span><br><span class="line"><span class="section"># 方法三：（该方法中间会空一行）</span></span><br><span class="line">空格&#123;0,3&#125; + 段落一</span><br><span class="line">无文字行（空格、制表符）&#123;1,&#125;</span><br><span class="line">空格&#123;0,3&#125; + 段落二</span><br></pre></td></tr></table></figure>
+<h3 id="（二）标题"><a href="#（二）标题" class="headerlink" title="（二）标题"></a>（二）标题</h3><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">`标题即标题，字号更大更粗，它对应&lt;h1&gt;-&lt;h6&gt;。</span><br><span class="line"></span><br><span class="line"><span class="section"># 方法一：（类atx）</span></span><br><span class="line">'#&#123;1,6&#125;' + (空格/制表符)&#123;0,&#125; + '标题内容' + '#&#123;0,&#125;'</span><br><span class="line"></span><br><span class="line">注：</span><br><span class="line">1、末尾的#号加多少都不影响，纯碎为了代码排版的美观。</span><br><span class="line">2、建议起始符后加一个空格，虽然markdown中大部分空格可以忽略或用制表符替代。</span><br><span class="line"></span><br><span class="line">示例：</span><br><span class="line"><span class="section"># 一级标题</span></span><br><span class="line"><span class="section">## 二级标题</span></span><br><span class="line"><span class="section">### 三级标题</span></span><br><span class="line"><span class="section">#### 四级标题</span></span><br><span class="line"><span class="section">##### 五级标题</span></span><br><span class="line"><span class="section">###### 六级标题</span></span><br><span class="line"></span><br><span class="line"><span class="section"># 方法二：（类setext）</span></span><br><span class="line">空格&#123;0,3&#125; + 标题内容</span><br><span class="line">'[=-]&#123;1,&#125;'</span><br><span class="line"></span><br><span class="line">注：</span><br><span class="line">1、'='为一级标题。</span><br><span class="line">2、'-'为二级标题。</span><br><span class="line">3、建议标题内容前不加空格，之所以能有空格因为4个空格被识别为代码区块，所以4个以下不会出现歧义。</span><br><span class="line"></span><br><span class="line">示例：</span><br><span class="line">一级标题</span><br><span class="line">=</span><br><span class="line">二级标题</span><br><span class="line">-</span><br></pre></td></tr></table></figure>
+<h6 id="六级标题示例"><a href="#六级标题示例" class="headerlink" title="六级标题示例"></a>六级标题示例</h6><h3 id="（三）列表无序与有序"><a href="#（三）列表无序与有序" class="headerlink" title="（三）列表无序与有序"></a>（三）列表无序与有序</h3><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">`列表是列表，分为无序和有序，它对应&lt;ul&gt;包裹&lt;li&gt;和&lt;ol&gt;包裹&lt;li&gt;。</span><br><span class="line"></span><br><span class="line"><span class="section"># 无序：</span></span><br><span class="line">'[*+-]' + 空格/制表符 + '列表内容'</span><br><span class="line"></span><br><span class="line">注：</span><br><span class="line">1、无序列表多层嵌套时，单项的标号会在实心点和空心点之间切换。</span><br><span class="line"></span><br><span class="line">示例：</span><br><span class="line"><span class="bullet">* </span>列表内容1</span><br><span class="line"><span class="bullet">* </span>列表内容2</span><br><span class="line"><span class="bullet">* </span>列表内容3</span><br></pre></td></tr></table></figure>
+<ul>
+<li>无序列表1示例</li>
+<li>无序列表2示例</li>
+</ul>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="section"># 有序：</span></span><br><span class="line">数字 + '.' + 空格 + '列表内容'</span><br><span class="line"></span><br><span class="line">注：</span><br><span class="line">1、有序列表目前只看第一个是不是数字（不看数字是几，也不看后续是否递增1，甚至是否为数字），均按1起始再递增。</span><br><span class="line">2、建议起始数字为1，因为未来版本可能支持有序列表的start属性。</span><br><span class="line">总注：</span><br><span class="line">1、一个&lt;li&gt;的标签中允许有多个段落，多个段落以无文字行隔开，并且新段落相对旧段落缩进4个空格或者1个制表符。</span><br><span class="line">2、列表多层嵌套时，在原来结构基础上缩进&#123;1,7&#125;个空格或1个制表符</span><br><span class="line">3、为避免项目列表的偶然产生，在歧义的符号前加上反斜杠\，如：1988\. what a great season.</span><br><span class="line"></span><br><span class="line">示例：</span><br><span class="line"><span class="bullet">1. </span>列表内容1</span><br><span class="line"><span class="bullet">2. </span>列表内容2</span><br><span class="line"><span class="bullet">3. </span>列表内容3</span><br></pre></td></tr></table></figure>
+<ol>
+<li>有序列表1示例</li>
+<li>有序列表2示例</li>
+</ol>
+<h3 id="（四）区块引用"><a href="#（四）区块引用" class="headerlink" title="（四）区块引用"></a>（四）区块引用</h3><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">空格&#123;0,3&#125; + '&gt;' + (空格/制表符)&#123;0,&#125; + '引用内容'</span><br><span class="line">空格&#123;0,3&#125; + '&gt;&#123;,1&#125;' + (空格/制表符)&#123;0,&#125; + '引用内容续'</span><br><span class="line"><span class="bullet">+ </span>空行&#123;1,&#125;</span><br><span class="line">'其他内容'</span><br><span class="line"></span><br><span class="line">注：</span><br><span class="line">1.引用嵌套引用，外层引用不可省略'&gt;'，内层引用在原来的'&gt;'上再加一个'&gt;'。</span><br><span class="line">2.引用嵌套其他markdown语法，可以嵌套标题、列表、代码区块等，但只能在最外层嵌套。</span><br><span class="line">3.引用嵌套的元素之间若想相互独立开，则由于区块引用允许忽略'&gt;'，故需要通过间隔至少一个无文字行来使得自己独立成段落，出现歧义的部分多加无文字行以区分。</span><br><span class="line">4、建议起始符前不加空格，其后加一个空格，虽然markdown中大部分空格可以忽略或用制表符替代。</span><br><span class="line"></span><br><span class="line">示例：</span><br><span class="line"><span class="quote">&gt; 引用内容</span></span><br><span class="line"><span class="quote">&gt; 引用内容续</span></span><br><span class="line">（空一行）</span><br><span class="line">其他内容</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>引用示例</p>
+</blockquote>
+<h3 id="（五）代码区块"><a href="#（五）代码区块" class="headerlink" title="（五）代码区块"></a>（五）代码区块</h3><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">`代码区块是划分代码的区域，它对应&lt;pre&gt;包裹&lt;code&gt;。</span><br><span class="line"></span><br><span class="line"><span class="section"># 单行代码（前后一致）</span></span><br><span class="line">'<span class="code">`'&#123;1,&#125; + 单行代码 + '`</span>'&#123;1,&#125;</span><br><span class="line"></span><br><span class="line">注：</span><br><span class="line">1、单行代码中要插入反引号<span class="code">`的话，则需要前后不用单反引号，而是用两个或以上，以区分，如`</span><span class="code">`code with(`</span>)``。</span><br><span class="line">2、如果不仅插入反引号，还直接插入，则用空格隔开，如<span class="code">`` `</span> ``。</span><br><span class="line"></span><br><span class="line">示例：</span><br><span class="line"><span class="code">`单行代码`</span></span><br></pre></td></tr></table></figure>
+<p><code>单行代码示例</code></p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="section"># 多行代码</span></span><br><span class="line"><span class="section">## 方法一：（`）</span></span><br><span class="line">'`'*3 + 所用语言&#123;,1&#125;</span><br><span class="line">多行代码</span><br><span class="line">'`'*3</span><br><span class="line"></span><br><span class="line">示例：</span><br><span class="line"><span class="code">```markdown</span></span><br><span class="line"><span class="code">多行代码</span></span><br><span class="line"><span class="code">```</span></span><br><span class="line"></span><br><span class="line"><span class="section">## 方法二：(空格/制表符)</span></span><br><span class="line">相对(空格&#123;4&#125;/制表符) + 代码第一行</span><br><span class="line">相对(空格&#123;4&#125;/制表符) + 代码第二行</span><br><span class="line"></span><br><span class="line">示例：</span><br><span class="line"><span class="code">	var num = 0;</span></span><br><span class="line"><span class="code">	console.log(num);</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">多行代码示例</span><br></pre></td></tr></table></figure>
+<h3 id="（六）分割线"><a href="#（六）分割线" class="headerlink" title="（六）分割线"></a>（六）分割线</h3><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[*-_]&#123;3,&#125;</span><br><span class="line"></span><br><span class="line">注：</span><br><span class="line">三个符号必须是同一个符号，并且要求在一行（之间可以有间隔）。</span><br><span class="line"></span><br><span class="line">示例：</span><br><span class="line"><span class="emphasis">***</span></span><br><span class="line">---</span><br><span class="line"><span class="emphasis">___</span></span><br></pre></td></tr></table></figure>
+<p>分割线示例</p>
+<hr>
+<h2 id="二、内容"><a href="#二、内容" class="headerlink" title="二、内容"></a>二、内容</h2><h3 id="（一）链接"><a href="#（一）链接" class="headerlink" title="（一）链接"></a>（一）链接</h3><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">`链接就是超链接，对应&lt;a&gt;。</span><br><span class="line"></span><br><span class="line"><span class="section"># 方法一：（行内式）</span></span><br><span class="line">'[' + '链接名' + ']' + '(' + '链接' + [空格/制表符]&#123;1,&#125; + 带引号的title名&#123;,1&#125; + ')'</span><br><span class="line"></span><br><span class="line">示例：</span><br><span class="line">[<span class="string">链接名</span>](<span class="link">url 'title1'</span>)</span><br><span class="line"></span><br><span class="line"><span class="section"># 方法二：（参考式，即定义url-&gt;调用url）</span></span><br><span class="line">定义在任意处：空格&#123;,3&#125; + '[' + id + ']:' + [空格/制表符]&#123;1,&#125; + url + [空格/制表符]&#123;1,&#125; + 换行&#123;,1&#125; + 带引号或括号的title名&#123;,1&#125;</span><br><span class="line">调用在任意处：'[' + 链接名 + ']' + '[' + id + ']'</span><br><span class="line"></span><br><span class="line">注：</span><br><span class="line">1、定义部分：定义的链接不会出现于md的显示中，它类似于函数定义；id可以为字母、数字、空白和标点，不区分大小写。</span><br><span class="line">2、调用部分：链接名和id的方括号之间有的可以添加空格/回车/制表符，这与md解析器有关，为保持兼容和格式统一不建议添加。</span><br><span class="line">2、当链接名和id的内容完全相同时，包裹id的方括号内的内容可以省略，甚至有的解析器中方括号也可以省略，为保持兼容不建议省略方括号。</span><br><span class="line"></span><br><span class="line">示例：</span><br><span class="line">[<span class="string">baidu</span>][<span class="symbol"></span>]</span><br><span class="line">[<span class="symbol">baidu</span>]: <span class="link">http://baidu.com 'baidu link'</span></span><br><span class="line"></span><br><span class="line"><span class="section"># 方法三：（省略式）</span></span><br><span class="line">'&lt;' + 带协议的url + '&gt;'</span><br><span class="line"></span><br><span class="line">注：</span><br><span class="line">1、url必须带协议</span><br><span class="line">2、url也可以是email等</span><br><span class="line"></span><br><span class="line">示例：</span><br><span class="line">&lt;http://baidu.com&gt;</span><br></pre></td></tr></table></figure>
+<p><a href="www.baidu.com">链接示例</a></p>
+<h3 id="（二）图片"><a href="#（二）图片" class="headerlink" title="（二）图片"></a>（二）图片</h3><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="section"># 方法一：（行内式）</span></span><br><span class="line">'!' + '[' + '链接名' + ']' + '(' + '链接' + [空格/制表符]&#123;1,&#125; + 引号包裹的title名&#123;,1&#125; + ')'</span><br><span class="line"></span><br><span class="line">示例：</span><br><span class="line">![<span class="string">图片名</span>](<span class="link">url</span>)</span><br><span class="line"></span><br><span class="line"><span class="section"># 方法二： （参考式）</span></span><br><span class="line">定义在任意处：'[' + id + ']:' + [空格/制表符]&#123;1,&#125; + url + [空格/制表符]&#123;1,&#125; + 引号/括号包裹的title名&#123;,1&#125;</span><br><span class="line">调用在任意处：'!' + '[' + 链接名 + ']' + '[' + id + ']'</span><br><span class="line"></span><br><span class="line">总注：</span><br><span class="line">1、markdown语法的图片不能设置宽高，如果需要设置宽高，可以使用&lt;img&gt;来替代。</span><br><span class="line"></span><br><span class="line">示例：</span><br><span class="line">![<span class="string">图片名</span>][<span class="symbol">id</span>]</span><br><span class="line">[<span class="symbol">id</span>]: <span class="link">url 'optional title'</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=1029113724,552464232&amp;fm=27&amp;gp=0.jpg" alt="图片示例"></p>
+<h3 id="（三）强调"><a href="#（三）强调" class="headerlink" title="（三）强调"></a>（三）强调</h3><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">`强调分为斜体强调和加粗强调，前者只用一个<span class="emphasis">*或_包裹，它对应于&lt;em&gt;；后者用连续两个*</span>或_包裹，它对应于&lt;strong&gt;。</span><br><span class="line"></span><br><span class="line"><span class="section"># 斜体强调（前后一致）</span></span><br><span class="line">[<span class="strong">*_] + 强调内容 + [*_</span>]</span><br><span class="line"></span><br><span class="line">示例：</span><br><span class="line"><span class="emphasis">*强调内容*</span></span><br><span class="line"><span class="emphasis">_强调内容_</span></span><br><span class="line"></span><br><span class="line"><span class="section"># 粗体强调（前后一致）</span></span><br><span class="line">[<span class="strong">*_]&#123;2&#125; + 强调内容 + [*_</span>]</span><br><span class="line"></span><br><span class="line">示例：</span><br><span class="line"><span class="strong">**强调内容**</span></span><br><span class="line"><span class="strong">__强调内容__</span></span><br></pre></td></tr></table></figure>
+<p><strong>粗体强调示例</strong></p>
+<h3 id="（四）表格"><a href="#（四）表格" class="headerlink" title="（四）表格"></a>（四）表格</h3><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">'|' + 空格 + 'title1' + 空格 + '|' + 'title2' + '|'</span><br><span class="line">'|' + 空格 + '[<span class="string">:</span>][<span class="symbol">-</span>]&#123;1,&#125;[<span class="string">:</span>]'&#123;3,&#125; + 空格 + '|' + '[<span class="string">:</span>][<span class="symbol">-</span>]&#123;1,&#125;[:]'&#123;3,&#125; + 空格 + '|'</span><br><span class="line">'|' + 空格&#123;1,&#125; + 'value1-1' + 空格&#123;1,&#125; + '|' + 空格&#123;1,&#125; + 'value1-2' + 空格&#123;1,&#125; + '|'</span><br><span class="line">'|' + 空格&#123;1,&#125; + 'value2-1' + 空格&#123;1,&#125; + '|' + 空格&#123;1,&#125; + 'value2-2' + 空格&#123;1,&#125; + '|'</span><br><span class="line"></span><br><span class="line">注：</span><br><span class="line">1.第二行的中间内容以冒号':'和短横杠'-'组合而成，其中短横杠为基本内容，冒号辅助以表示默认/左/右/居中（不写代表默认，只写左边一个代表居左，只写右边一个代表居右，两边各写一个代表居中），两种符号的总个数至少为3个（即短横杠至少有一个）。</span><br><span class="line">2.第三行开始的中间内容辅助以至少一个空格来填充，以构成想要的代码展示。</span><br><span class="line"></span><br><span class="line">示例：</span><br><span class="line">| title1 | title2 | title3 | title4 |</span><br><span class="line">| ------ | :----- | :----: | -----: |</span><br><span class="line">| value1 | value2 | value3 | value4 |</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>表格title1示例</th>
+<th style="text-align:left">title2</th>
+<th style="text-align:center">title3</th>
+<th style="text-align:right">title4</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>表格value1示例</td>
+<td style="text-align:left">value2</td>
+<td style="text-align:center">value3</td>
+<td style="text-align:right">value4</td>
+</tr>
+</tbody>
+</table>
+<h3 id="（五）脚注"><a href="#（五）脚注" class="headerlink" title="（五）脚注"></a>（五）脚注</h3><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">示例：</span><br><span class="line">Markdown[^1]</span><br><span class="line">[<span class="symbol">^1</span>]: <span class="link">Markdown是一种纯文本标记语言</span></span><br></pre></td></tr></table></figure>
+<h2 id="三、其他"><a href="#三、其他" class="headerlink" title="三、其他"></a>三、其他</h2><h3 id="（一）目录"><a href="#（一）目录" class="headerlink" title="（一）目录"></a>（一）目录</h3><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[TOC]</span><br><span class="line"></span><br><span class="line">注：</span><br><span class="line">1、无视大小写</span><br><span class="line">2、不一定兼容</span><br></pre></td></tr></table></figure>
+<p>目录示例</p>
+<p>[TOC]</p>
+<h3 id="（二）关于对makrdown中的html"><a href="#（二）关于对makrdown中的html" class="headerlink" title="（二）关于对makrdown中的html"></a>（二）关于对makrdown中的html</h3><ol>
+<li><p>markdown中使用html标签</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">markdown中可以使用html标签，html的块标签内不可以识别markdown语法，html的行内标签内可以识别markdown语法。</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<ol start="2">
+<li><p>markdown中的html中的特殊字符的转义</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;和&amp;，在html文件的html文本中是不可以直接使用的，会被识别为html语义（标签起始符和实体起始符）；若想展示它们的实体，则要通过转义字符来表示（ '&amp; l t ;' 和 '&amp; a m p ;'）。</span><br><span class="line">但是在markdown文件的html文本中是可以直接使用的，因为它们会被自动转义（当作为标签起始符时不转义，作为实体起始符时转义）。</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<ol start="3">
+<li><p>常用转义字符串</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://114.xixik.com/character/</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
     }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
 </script>
-    <!-- CDN failover -->
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
-    <script type="text/javascript">
-        if (typeof window.$ === 'undefined')
-        {
-            console.warn('jquery load from jsdelivr failed, will load local script')
-            document.write('<script src="/lib/jquery.min.js">\x3C/script>')
-        }
-    </script>
-    <script src="/scripts/main.js"></script>
-    <!-- algolia -->
-    
-    <!-- busuanzi  -->
-    
-    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-    
-    <!-- CNZZ  -->
-    
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Mooy Xu</p>
+  <div class="site-description" itemprop="description">code</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">5</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
     </div>
-    <!-- async load share.js -->
-     
-    </body>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Mooy Xu</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/muse.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
 </html>
-
-
